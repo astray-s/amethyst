@@ -86,7 +86,7 @@ dependencies {
     // FocusEngine's rule logic (org.json, TextUtils, SharedPreferences, AlarmManager)
     // is untestable off-device without real framework implementations.
     testImplementation "org.json:json:20250107"
-    testImplementation "org.robolectric:robolectric:4.15.1"
+    testImplementation "org.robolectric:robolectric:4.17"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
     implementation project(':capacitor-cordova-android-plugins')
