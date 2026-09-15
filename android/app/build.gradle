@@ -85,7 +85,7 @@ dependencies {
     // The android.jar on the unit-test classpath only ships stubs that throw, so
     // FocusEngine's rule logic (org.json, TextUtils, SharedPreferences, AlarmManager)
     // is untestable off-device without real framework implementations.
-    testImplementation "org.json:json:20250107"
+    testImplementation "org.json:json:20260814"
     testImplementation "org.robolectric:robolectric:4.15.1"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
