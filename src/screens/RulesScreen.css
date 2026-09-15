@@ -1,0 +1,1332 @@
+.amethyst-apps-screen {
+  min-height: 100dvh;
+  padding: max(20px, env(safe-area-inset-top)) 20px 126px;
+  color: #fff;
+  background:
+    radial-gradient(85% 32% at 50% -6%, rgba(92, 53, 164, .22), transparent 70%),
+    #000;
+}
+
+.amethyst-apps-screen button {
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.amethyst-apps-header,
+.nested-screen-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.amethyst-apps-header {
+  margin: 4px 0 27px;
+}
+
+.amethyst-apps-header p,
+.nested-screen-header p,
+.apps-section__header p,
+.blocked-apps-strip__heading p,
+.amethyst-editor-field > span,
+.amethyst-installed-list > p,
+.amethyst-rule-detail-sheet header p {
+  margin: 0;
+  color: #8d8d92;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+.amethyst-apps-header h1,
+.nested-screen-header h1 {
+  margin: 4px 0 0;
+  color: #fff;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -1.5px;
+}
+
+.amethyst-header-action,
+.nested-screen-header > button,
+.nested-screen-header__add {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid #343434;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(27, 27, 27, .92);
+}
+
+.amethyst-header-action span {
+  margin-top: -2px;
+  font-size: 27px;
+  font-weight: 300;
+}
+
+.blocked-apps-strip {
+  position: relative;
+  margin: 0 -20px 34px;
+  padding: 21px 20px 19px;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, .03);
+  border-bottom: 1px solid rgba(255, 255, 255, .03);
+  background:
+    radial-gradient(circle at 15% 7%, rgba(167, 87, 249, .18), transparent 30%),
+    radial-gradient(circle at 86% 92%, rgba(85, 217, 237, .08), transparent 34%),
+    linear-gradient(115deg, rgba(31, 20, 51, .94), rgba(12, 13, 23, .98) 67%);
+}
+
+.blocked-apps-strip__heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.blocked-apps-strip__heading h2 {
+  margin: 3px 0 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -.6px;
+}
+
+.blocked-apps-strip__rail,
+.rules-rail {
+  display: flex;
+  gap: 11px;
+  overflow-x: auto;
+  padding: 16px 20px 2px;
+  margin: 0 -20px;
+  scrollbar-width: none;
+}
+
+.blocked-apps-strip__rail::-webkit-scrollbar,
+.rules-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.blocked-app-chip {
+  display: flex;
+  width: 122px;
+  min-width: 122px;
+  padding: 10px;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid rgba(195, 155, 255, .2);
+  border-radius: 17px;
+  color: #fff;
+  background: rgba(0, 0, 0, .26);
+  text-align: left;
+}
+
+.blocked-app-chip strong,
+.blocked-app-chip small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.blocked-app-chip strong { font-size: 12px; font-weight: 600; }
+.blocked-app-chip small { margin-top: 2px; color: var(--amethyst-cyan-soft); font-size: 10px; }
+
+.apps-section { margin-top: 30px; }
+
+.apps-section__header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.apps-section__header h2 {
+  margin: 4px 0 0;
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: -.85px;
+}
+
+.apps-text-action {
+  border: 0;
+  color: var(--amethyst-cyan-soft);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.rules-rail {
+  padding-top: 1px;
+  padding-bottom: 5px;
+}
+
+.amethyst-rule-tile {
+  display: flex;
+  width: 173px;
+  min-width: 173px;
+  min-height: 184px;
+  padding: 15px;
+  flex-direction: column;
+  align-items: stretch;
+  border: 1px solid #3f3450;
+  border-radius: 24px;
+  color: #fff;
+  background: linear-gradient(155deg, #33234b, #191522 62%, #111018);
+  text-align: left;
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.amethyst-rule-tile:active { transform: scale(.98); }
+.amethyst-rule-tile.is-selected { border-color: var(--amethyst-cyan-soft); box-shadow: inset 0 0 0 1px rgba(184, 244, 255, .18), 0 0 22px rgba(167, 87, 249, .12); }
+
+.amethyst-rule-tile__top { display: flex; align-items: center; justify-content: space-between; }
+.amethyst-rule-tile__active { padding: 4px 7px; border-radius: 999px; color: var(--amethyst-cyan-soft); background: rgba(129, 85, 201, .22); font-size: 10px; font-weight: 700; }
+.amethyst-rule-tile__body { display: grid; gap: 4px; margin-top: auto; }
+.amethyst-rule-tile__body strong { font-size: 17px; font-weight: 600; letter-spacing: -.55px; }
+.amethyst-rule-tile__body small { color: #c2c1c6; font-size: 12px; }
+.amethyst-rule-tile__meta { width: fit-content; margin-top: 12px; padding: 5px 7px; border-radius: 999px; color: #c9c8cd; background: rgba(0, 0, 0, .38); font-size: 10px; }
+
+.rule-create-tile {
+  display: grid;
+  width: 128px;
+  min-width: 128px;
+  min-height: 184px;
+  place-content: center;
+  gap: 10px;
+  border: 1px dashed #3a3a3a;
+  border-radius: 24px;
+  color: #d5d5d8;
+  background: #111;
+}
+
+.rule-create-tile span { margin: auto; color: var(--amethyst-cyan-soft); font-size: 30px; font-weight: 200; }
+.rule-create-tile strong { font-size: 13px; font-weight: 600; }
+
+.rules-list-view { padding-top: 4px; }
+
+.nested-screen-header {
+  gap: 12px;
+  margin-bottom: 21px;
+}
+
+.nested-screen-header > div { flex: 1; }
+.nested-screen-header h1 { font-size: 27px; }
+.nested-screen-header > button:first-child { font-size: 35px; font-weight: 200; line-height: 1; }
+.nested-screen-header__add { font-size: 25px; font-weight: 300; }
+.nested-screen-intro { max-width: 310px; margin: 0 0 24px; color: #a4a3a8; font-size: 14px; line-height: 1.45; }
+
+.rules-list {
+  display: grid;
+  gap: 11px;
+}
+
+.amethyst-rule-tile--compact {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  min-height: 112px;
+}
+
+.amethyst-rule-tile--compact .amethyst-rule-tile__body { margin-top: 11px; }
+.amethyst-rule-tile--compact .amethyst-rule-tile__meta { position: absolute; align-self: end; margin-top: -38px; }
+
+.rules-new-button,
+.amethyst-editor-save {
+  width: 100%;
+  min-height: 54px;
+  border: 0;
+  border-radius: 17px;
+  color: #150c22;
+  background: var(--amethyst-soft);
+  font-weight: 700;
+}
+
+.rules-new-button { margin-top: 20px; }
+
+.amethyst-sheet-backdrop {
+  position: fixed;
+  z-index: 60;
+  inset: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: max(9px, env(safe-area-inset-top)) 0 0;
+  background: rgba(0, 0, 8, .72);
+  backdrop-filter: blur(12px);
+  animation: amethyst-backdrop-in 180ms ease-out both;
+}
+
+.amethyst-rule-detail-sheet,
+.amethyst-rule-editor-sheet {
+  width: min(100%, 480px);
+  height: calc(100dvh - max(9px, env(safe-area-inset-top)));
+  max-height: none;
+  overflow: auto;
+  padding: 10px 20px calc(21px + env(safe-area-inset-bottom));
+  border: 1px solid rgba(211, 194, 255, .18);
+  border-bottom: 0;
+  border-radius: 28px 28px 0 0;
+  background:
+    radial-gradient(70% 20% at 50% 0, rgba(151, 92, 241, .16), transparent 100%),
+    radial-gradient(50% 20% at 100% 16%, rgba(50, 172, 213, .07), transparent 100%),
+    #15131b;
+  box-shadow: 0 -20px 50px rgba(0, 0, 0, .48);
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  animation: amethyst-sheet-in 280ms cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.amethyst-sheet-backdrop[data-motion-state="closing"] {
+  animation: amethyst-backdrop-out 220ms ease-in both;
+}
+
+.amethyst-sheet-backdrop[data-motion-state="closing"] .amethyst-rule-detail-sheet,
+.amethyst-sheet-backdrop[data-motion-state="closing"] .amethyst-rule-editor-sheet {
+  animation: amethyst-sheet-out 220ms cubic-bezier(.4, 0, 1, 1) both;
+}
+
+@keyframes amethyst-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes amethyst-backdrop-out {
+  to { opacity: 0; }
+}
+
+@keyframes amethyst-sheet-in {
+  from { opacity: 0; transform: scale(.985); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes amethyst-sheet-out {
+  to { opacity: 0; transform: scale(.985); }
+}
+
+.amethyst-rule-detail-sheet::-webkit-scrollbar,
+.amethyst-rule-editor-sheet::-webkit-scrollbar { display: none; }
+
+.amethyst-sheet-handle {
+  width: 36px;
+  height: 4px;
+  margin: 2px auto 19px;
+  border-radius: 999px;
+  background: #56565a;
+}
+
+.amethyst-rule-detail-sheet header,
+.amethyst-rule-editor-sheet header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.amethyst-rule-detail-sheet h2,
+.amethyst-rule-editor-sheet h2 { margin: 5px 0 0; font-size: 27px; letter-spacing: -1px; }
+.amethyst-rule-detail-sheet header > button,
+.amethyst-rule-editor-sheet header > button:first-child { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid #3c3c3c; border-radius: 50%; color: #fff; background: #0f0f0f; font-size: 25px; }
+
+.amethyst-detail-rows {
+  display: grid;
+  margin: 20px 0 25px;
+  border: 1px solid rgba(198, 166, 255, .16);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .02);
+}
+
+.amethyst-detail-row {
+  display: flex;
+  padding: 14px 15px;
+  align-items: center;
+  gap: 13px;
+  border-bottom: 1px solid rgba(255, 255, 255, .06);
+}
+
+.amethyst-detail-row:last-child { border-bottom: 0; }
+
+.amethyst-detail-row__icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  place-items: center;
+}
+
+.amethyst-detail-row__icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+.amethyst-detail-row > span:nth-child(2) { flex: 1; font-size: 14px; font-weight: 600; }
+
+.amethyst-detail-row > small,
+.amethyst-detail-row__value small { color: #b6b1c4; font-size: 13px; font-weight: 500; text-align: right; }
+
+.amethyst-detail-row__value { display: grid; justify-items: end; gap: 6px; }
+
+.amethyst-detail-stack { display: flex; align-items: center; }
+.amethyst-detail-stack__item { display: grid; width: 26px; height: 26px; place-items: center; margin-left: -8px; }
+.amethyst-detail-stack__item:first-child { margin-left: 0; }
+.amethyst-detail-stack__item .amethyst-app-glyph { width: 22px; height: 22px; padding: 5px; }
+.amethyst-detail-stack__more {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  margin-left: -8px;
+  place-items: center;
+  border: 1.5px solid rgba(226, 206, 255, .2);
+  border-radius: 50%;
+  color: #cfb7ff;
+  background: #1b141f;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.amethyst-detail-actions { display: grid; grid-template-columns: 1fr 1.12fr; gap: 9px; }
+.amethyst-detail-actions button { min-height: 49px; border-radius: 15px; font-weight: 700; }
+.amethyst-detail-edit { border: 1px solid #3a3a3a; color: #fff; background: #232323; }
+
+.amethyst-rule-editor-sheet { max-height: none; }
+.amethyst-rule-editor-sheet header { align-items: center; margin-bottom: 24px; }
+.amethyst-rule-editor-sheet header > div { flex: 1; }
+.amethyst-rule-editor-sheet h2 { max-width: 200px; overflow: hidden; font-size: 21px; text-overflow: ellipsis; white-space: nowrap; }
+.amethyst-editor-save-top { border: 0; color: var(--amethyst-cyan-soft); background: transparent; font-size: 14px; font-weight: 700; }
+.amethyst-editor-save-top:disabled { color: #6d6d70; }
+.amethyst-editor-field { display: grid; gap: 8px; margin-bottom: 25px; }
+.amethyst-editor-field input { min-height: 50px; padding: 0 14px; border: 1px solid #3a3a3a; border-radius: 14px; color: #fff; background: #0c0c0c; font: inherit; font-size: 15px; }
+
+.amethyst-editor-mode { margin: 4px 0 22px; }
+
+.amethyst-editor-rows {
+  display: grid;
+  margin-top: 4px;
+  border: 1px solid rgba(198, 166, 255, .16);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .02);
+}
+
+.amethyst-editor-row + .amethyst-editor-row { border-top: 1px solid rgba(255, 255, 255, .06); }
+
+.amethyst-editor-row__header {
+  display: flex;
+  width: 100%;
+  min-height: 60px;
+  padding: 12px 15px;
+  align-items: center;
+  gap: 12px;
+  border: 0;
+  color: #fff;
+  background: transparent;
+  text-align: left;
+}
+
+.amethyst-editor-row__icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  place-items: center;
+}
+
+.amethyst-editor-row__icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.amethyst-editor-row__label { flex: 1; font-size: 14px; font-weight: 600; }
+.amethyst-editor-row__value { color: #b6b1c4; font-size: 13px; font-weight: 500; text-align: right; }
+.amethyst-editor-row__chevron { width: 16px; height: 16px; flex: 0 0 auto; fill: none; stroke: #8d8794; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 180ms ease; }
+.amethyst-editor-row__chevron.is-open { transform: rotate(180deg); stroke: #cfb7ff; }
+.amethyst-editor-row__body { padding: 2px 15px 20px; }
+
+.amethyst-choice-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.amethyst-choice-cards button { display: grid; min-height: 75px; padding: 12px; gap: 5px; border: 1px solid #383838; border-radius: 16px; color: #cac9ce; background: #101010; text-align: left; }
+.amethyst-choice-cards button.is-selected { border-color: var(--amethyst-soft); color: #fff; background: rgba(140, 91, 220, .13); }
+.amethyst-choice-cards b { font-size: 14px; }
+.amethyst-choice-cards small { color: #a2a1a7; font-size: 11px; line-height: 1.25; }
+
+.amethyst-site-choice-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.amethyst-site-choice-list button,
+.amethyst-installed-list button { display: flex; min-width: 0; min-height: 51px; padding: 8px; align-items: center; gap: 9px; border: 1px solid #333; border-radius: 14px; color: #e6e5e9; background: #101010; text-align: left; }
+.amethyst-site-choice-list button.is-selected { border-color: rgba(195, 155, 255, .72); background: rgba(140, 91, 220, .11); }
+.amethyst-site-choice-list .amethyst-app-glyph { width: 30px; height: 30px; padding: 7px; aspect-ratio: 1; }
+.amethyst-site-choice-list span,
+.amethyst-installed-list button > span { flex: 1; overflow: hidden; font-size: 12px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.amethyst-site-choice-list i,
+.amethyst-installed-list i { display: grid; width: 19px; height: 19px; place-items: center; border: 1px solid #494949; border-radius: 50%; color: #a9a8ae; font-size: 13px; font-style: normal; }
+.amethyst-site-choice-list .is-selected i,
+.amethyst-installed-list i.is-selected { border-color: var(--amethyst-soft); color: #150c22; background: var(--amethyst-soft); }
+
+.amethyst-installed-list { display: grid; gap: 7px; margin-top: 18px; }
+.amethyst-installed-list > p { margin-bottom: 3px; }
+.amethyst-installed-list button { width: 100%; padding: 8px 11px; border-radius: 13px; }
+.amethyst-installed-list .amethyst-app-glyph { width: 31px; height: 31px; padding: 0; aspect-ratio: 1; }
+
+.amethyst-editor-segment { display: grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 13px; background: #0c0c0c; }
+.amethyst-editor-segment button { min-height: 39px; border: 0; border-radius: 10px; color: #a3a2a8; background: transparent; font-size: 13px; font-weight: 600; }
+.amethyst-editor-segment button.is-selected { color: #101010; background: #e8e8e9; }
+.amethyst-time-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 12px; }
+.amethyst-time-inputs label { display: grid; gap: 6px; color: #97969d; font-size: 10px; font-weight: 700; letter-spacing: .1em; }
+.amethyst-time-inputs input { width: 100%; min-height: 44px; padding: 0 9px; border: 1px solid #383838; border-radius: 12px; color: #fff; color-scheme: dark; background: #101010; font: inherit; }
+.amethyst-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 11px; }
+.amethyst-weekdays button { width: 100%; aspect-ratio: 1; border: 1px solid #3d3d3d; border-radius: 50%; color: #aaa9ae; background: #101010; font-size: 11px; font-weight: 700; }
+.amethyst-weekdays button.is-selected { border-color: var(--amethyst-soft); color: #150c22; background: var(--amethyst-soft); }
+.amethyst-rule-editor-sheet footer { display: grid; gap: 9px; margin-top: 27px; }
+.amethyst-editor-delete { min-height: 47px; border: 1px solid rgba(255, 146, 126, .35); border-radius: 15px; color: #ffb4a7; background: rgba(112, 25, 20, .3); font-weight: 700; }
+.amethyst-editor-save:disabled { opacity: .42; }
+
+@media (min-width: 520px) {
+  .amethyst-apps-screen { width: min(100%, 480px); margin: 0 auto; border-inline: 1px solid #202020; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .blocked-apps-strip__pulse { animation: blocked-pulse 2.2s ease-in-out infinite; }
+  .amethyst-rule-tile,
+  .blocked-app-chip { animation: rules-rise .38s both; }
+  .amethyst-rule-tile:nth-child(2) { animation-delay: .05s; }
+  .amethyst-rule-tile:nth-child(3) { animation-delay: .1s; }
+  @keyframes blocked-pulse { 50% { transform: scale(.82); box-shadow: 0 0 0 8px rgba(85, 217, 237, 0), 0 0 8px rgba(85, 217, 237, .38); } }
+  @keyframes rules-rise { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+}
+
+/* Primary Apps tab: direct visual translation of the audited Android reference. */
+.amethyst-apps-screen{padding:max(22px,env(safe-area-inset-top)) 18px 124px;background:radial-gradient(90% 20% at 50% 0,rgba(71,88,132,.16),transparent 68%),#000}
+.amethyst-apps-header{min-height:108px;margin:0;align-items:flex-start}.amethyst-apps-header h1{margin:0;font-size:43px;font-weight:610;letter-spacing:-2.2px}.amethyst-apps-header p,.amethyst-header-action,.blocked-apps-strip__heading p,.blocked-apps-strip__pulse{display:none}
+.blocked-apps-strip{margin:0 0 48px;padding:0;overflow:visible;border:0;background:transparent}.blocked-apps-strip__heading{gap:11px}.blocked-apps-strip__lock{display:grid;width:28px;height:28px;place-items:center;border-radius:8px;color:var(--amethyst-lilac);background:#242328;font-size:21px;line-height:1}.blocked-apps-strip__heading h2,.apps-section__header h2{margin:0;color:#fff;font-size:24px;font-weight:570;letter-spacing:-1px}.blocked-apps-strip__rail{gap:24px;margin:0;padding:27px 2px 0}
+.blocked-app-chip{display:grid;width:118px;min-width:118px;padding:0;justify-items:center;gap:8px;border:0;border-radius:0;background:transparent;text-align:center}.blocked-app-chip__icon{position:relative;display:grid;width:102px;height:102px;place-items:center;padding:8px;border:3px solid var(--amethyst-lilac);border-radius:50%;box-shadow:0 0 17px rgba(156,109,239,.16)}.blocked-app-chip__icon .amethyst-app-glyph{width:82px;height:82px;padding:18px;border-radius:50%;filter:saturate(.78) brightness(.68)}.blocked-app-chip__lock{position:absolute;display:grid;width:35px;height:35px;place-items:center;border:1px solid rgba(221,207,255,.46);border-radius:50%;color:#f4efff;background:rgba(12,11,15,.86);box-shadow:0 2px 8px rgba(0,0,0,.55)}.blocked-app-chip__lock svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.blocked-app-chip strong,.blocked-app-chip small{display:block;overflow:hidden;max-width:118px;text-overflow:ellipsis;white-space:nowrap}.blocked-app-chip strong{color:#fff;font-size:15px;font-weight:550}.blocked-app-chip small{margin:-4px 0 0;color:var(--amethyst-lilac);font-size:13px;font-weight:600}
+.apps-section{margin-top:0}.apps-section__header{margin-bottom:20px;align-items:center}.apps-text-action{display:grid;width:64px;height:64px;place-items:center;border-radius:50%;color:#dddde2;background:#1d1d20;font-size:40px;font-weight:250;line-height:1}.rules-rail{gap:17px;margin:0 -18px;padding:0 18px 5px}
+.amethyst-rule-tile{width:244px;min-width:244px;min-height:280px;padding:22px 20px;border-color:rgba(193,207,238,.17);border-radius:34px;background:radial-gradient(circle at 35% 8%,rgba(72,94,112,.24),transparent 36%),linear-gradient(150deg,#192226,#111214 66%,#08090a);box-shadow:inset 0 1px rgba(255,255,255,.06)}.amethyst-rule-tile--1{background:radial-gradient(circle at 36% 8%,rgba(73,79,93,.17),transparent 36%),linear-gradient(150deg,#1b1d20,#111214 66%,#08090a)}.amethyst-rule-tile--2,.amethyst-rule-tile--3{background:radial-gradient(circle at 36% 8%,rgba(74,60,106,.19),transparent 36%),linear-gradient(150deg,#191822,#111114 66%,#08090a)}.amethyst-rule-tile.is-selected{border-color:rgba(188,207,237,.46);box-shadow:inset 0 0 0 1px rgba(188,207,237,.08),0 0 25px rgba(113,98,183,.11)}.amethyst-rule-tile__symbol{color:var(--amethyst-lilac);font-size:34px}.amethyst-rule-tile__active{color:var(--amethyst-lilac);background:rgba(107,88,154,.32)}.amethyst-rule-tile__body{gap:6px}.amethyst-rule-tile__body strong{font-size:27px;font-weight:520;letter-spacing:-1.25px}.amethyst-rule-tile__body small{color:#a8a9ae;font-size:16px}.amethyst-rule-tile__meta{margin-top:17px;padding:8px 12px;color:var(--amethyst-lilac);background:rgba(0,0,0,.42);font-size:13px}
+.rule-create-tile{width:150px;min-width:150px;min-height:280px;border-radius:34px;border-color:rgba(197,200,236,.25);background:#101114}
+.blocked-apps-strip{margin-bottom:34px!important}.blocked-apps-strip__heading h2{font-size:21px!important}.blocked-apps-strip__rail{gap:15px!important;padding-top:18px!important}.blocked-app-chip{min-width:58px!important}.blocked-app-chip__icon{width:46px!important;height:46px!important}.amethyst-rule-tile{box-shadow:inset 0 1px rgba(255,255,255,.06),0 17px 36px rgba(74,56,117,.14)!important}
+
+/* Compact phone pass: preserve the Amethyst hierarchy without overpowering the viewport. */
+.amethyst-apps-screen {
+  padding: max(18px, env(safe-area-inset-top)) 18px 124px;
+  background:
+    radial-gradient(90% 18% at 50% 0, rgba(88, 60, 139, .13), transparent 72%),
+    #020204;
+}
+
+.amethyst-apps-header { min-height: 78px; }
+.amethyst-apps-header h1 { font-size: 34px; font-weight: 620; letter-spacing: -1.7px; }
+.blocked-apps-strip { margin-bottom: 30px !important; }
+.blocked-apps-strip__lock { width: 24px; height: 24px; border-radius: 7px; font-size: 17px; }
+
+.blocked-apps-strip__heading h2,
+.apps-section__header h2 {
+  font-size: 20px !important;
+  letter-spacing: -.75px;
+}
+
+.blocked-apps-strip__rail {
+  gap: 15px !important;
+  padding: 16px 2px 1px !important;
+}
+
+.blocked-app-chip {
+  width: 61px !important;
+  min-width: 61px !important;
+  gap: 6px;
+}
+
+.blocked-app-chip__icon {
+  width: 50px !important;
+  height: 50px !important;
+  padding: 5px;
+  border-width: 1.5px;
+  box-shadow: 0 0 15px rgba(155, 108, 235, .13);
+}
+
+.blocked-app-chip__icon .amethyst-app-glyph {
+  width: 38px;
+  height: 38px;
+  padding: 9px;
+}
+
+.blocked-app-chip__lock {
+  right: -2px;
+  bottom: -1px;
+  width: 22px;
+  height: 22px;
+}
+
+.blocked-app-chip__lock svg { width: 12px; height: 12px; }
+.blocked-app-chip strong,
+.blocked-app-chip small { max-width: 66px; }
+.blocked-app-chip strong { font-size: 10px; }
+.blocked-app-chip small { margin-top: -3px; font-size: 9px; }
+.apps-section__header { margin-bottom: 15px; }
+.apps-text-action { width: 44px; height: 44px; font-size: 27px; }
+.rules-rail { gap: 13px; }
+
+.amethyst-rule-tile {
+  width: 204px;
+  min-width: 204px;
+  min-height: 232px;
+  padding: 18px 17px;
+  border-radius: 27px;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, .05),
+    0 15px 31px rgba(62, 45, 101, .13) !important;
+}
+
+.amethyst-rule-tile__symbol { font-size: 27px; }
+.amethyst-rule-tile__body strong { font-size: 22px; letter-spacing: -.9px; }
+.amethyst-rule-tile__body small { font-size: 13px; }
+.amethyst-rule-tile__meta { margin-top: 13px; padding: 6px 9px; font-size: 10px; }
+.rule-create-tile { width: 122px; min-width: 122px; min-height: 232px; border-radius: 27px; }
+
+/* ─── Amethyst UI Polish: glass-morphism, shimmer, view transitions ─── */
+
+/* Glass-morphism on rule tiles */
+.amethyst-rule-tile {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(167, 87, 249, .15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.amethyst-rule-tile:hover {
+  border-color: rgba(167, 87, 249, .3);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, .08),
+    0 18px 40px rgba(74, 56, 117, .18),
+    0 0 0 1px rgba(167, 87, 249, .08) !important;
+}
+
+.amethyst-rule-tile:active {
+  transform: scale(.97);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, .04),
+    0 8px 20px rgba(62, 45, 101, .14) !important;
+}
+
+/* Shimmer sweep on blocked apps strip */
+.blocked-apps-strip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(167, 87, 249, .06) 0%,
+    rgba(167, 87, 249, .03) 30%,
+    transparent 70%
+  );
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  pointer-events: none;
+  animation: amethyst-shimmer 4.5s ease-in-out infinite;
+}
+
+@keyframes amethyst-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Pulsing glow on the "New rule" create tile */
+.rule-create-tile {
+  border: 1.5px dashed rgba(197, 200, 236, .28);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  animation: amethyst-create-pulse 3s ease-in-out infinite;
+}
+
+.rule-create-tile:hover {
+  border-color: rgba(167, 87, 249, .5);
+  box-shadow: 0 0 24px rgba(167, 87, 249, .15), inset 0 0 12px rgba(167, 87, 249, .06);
+}
+
+.rule-create-tile:active {
+  transform: scale(.96);
+}
+
+@keyframes amethyst-create-pulse {
+  0%, 100% { box-shadow: 0 0 0 rgba(167, 87, 249, 0); }
+  50% { box-shadow: 0 0 20px rgba(167, 87, 249, .1), 0 0 40px rgba(167, 87, 249, .04); }
+}
+
+/* View transition animations */
+.rules-list-view,
+.app-group-detail {
+  animation: amethyst-fadeSlideIn 0.28s ease-out both;
+}
+
+@keyframes amethyst-fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* App group row icon glow treatment */
+.app-group-row__icon {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 10px;
+  font-size: 16px;
+  background: rgba(167, 87, 249, .1);
+  color: var(--amethyst-lilac);
+  filter: drop-shadow(0 0 6px rgba(167, 87, 249, .25));
+  transition: filter 0.2s ease;
+}
+
+.app-group-row:hover .app-group-row__icon,
+.app-group-row:active .app-group-row__icon {
+  filter: drop-shadow(0 0 10px rgba(167, 87, 249, .4));
+}
+
+/* Glow icon utility used by editor rows */
+.amethyst-glow-icon {
+  filter: drop-shadow(0 0 5px rgba(167, 87, 249, .3));
+  transition: filter 0.2s ease;
+}
+
+.amethyst-glow-ring {
+  border-radius: 10px;
+  background: rgba(167, 87, 249, .08);
+  box-shadow: 0 0 8px rgba(167, 87, 249, .12);
+}
+
+/* Reduced motion: disable shimmer and pulse */
+@media (prefers-reduced-motion: reduce) {
+  .blocked-apps-strip::after { animation: none; }
+  .rule-create-tile { animation: none; }
+  .rules-list-view,
+  .app-group-detail { animation: none; }
+}
+
+/* ─── Amethyst UI Polish: rule editor sheet entrance and button styling ─── */
+
+/* Sheet entrance animation — slide up from bottom with subtle scale */
+.amethyst-rule-editor-sheet {
+  animation: amethyst-sheetSlideUp 0.32s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+@keyframes amethyst-sheetSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.amethyst-sheet-backdrop[data-motion-state="closing"] .amethyst-rule-editor-sheet {
+  animation: amethyst-sheetSlideDown 0.22s cubic-bezier(.4, 0, 1, 1) both;
+}
+
+@keyframes amethyst-sheetSlideDown {
+  to {
+    opacity: 0;
+    transform: translateY(40px) scale(.98);
+  }
+}
+
+/* Save button — full-width gradient with premium feel */
+.amethyst-editor-save {
+  width: 100%;
+  min-height: 54px;
+  border: 0;
+  border-radius: 16px;
+  color: #fff;
+  background: linear-gradient(135deg, #8c5bdc 0%, #5d3e97 50%, #355f9d 100%);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -.3px;
+  box-shadow: 0 4px 18px rgba(140, 91, 220, .25), inset 0 1px rgba(255, 255, 255, .1);
+  transition: box-shadow 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+}
+
+.amethyst-editor-save:hover:not(:disabled) {
+  box-shadow: 0 6px 24px rgba(140, 91, 220, .35), inset 0 1px rgba(255, 255, 255, .12);
+}
+
+.amethyst-editor-save:active:not(:disabled) {
+  transform: scale(.98);
+  box-shadow: 0 2px 10px rgba(140, 91, 220, .2);
+}
+
+.amethyst-editor-save:disabled {
+  opacity: .38;
+  background: linear-gradient(135deg, #5a4578, #3a3555 50%, #2d3a50);
+  box-shadow: none;
+}
+
+/* Delete button — ghost/outlined red style */
+.amethyst-editor-delete {
+  min-height: 47px;
+  border: 1px solid rgba(255, 146, 126, .25);
+  border-radius: 15px;
+  color: #ffb4a7;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.amethyst-editor-delete:hover {
+  background: rgba(112, 25, 20, .2);
+  border-color: rgba(255, 146, 126, .4);
+}
+
+.amethyst-editor-delete:active {
+  transform: scale(.97);
+  background: rgba(112, 25, 20, .35);
+}
+
+/* Site/app toggle bounce animation */
+.amethyst-site-choice-list button,
+.amethyst-installed-list button {
+  transition: transform 0.15s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.amethyst-site-choice-list button:active,
+.amethyst-installed-list button:active {
+  transform: scale(.92);
+}
+
+/* Custom time picker input styling */
+.amethyst-time-inputs input[type="time"],
+.amethyst-time-inputs input[type="datetime-local"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  min-height: 46px;
+  padding: 0 12px;
+  border: 1px solid rgba(167, 87, 249, .18);
+  border-radius: 13px;
+  color: #fff;
+  color-scheme: dark;
+  background: rgba(16, 16, 16, .9);
+  font: inherit;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.amethyst-time-inputs input[type="time"]:focus,
+.amethyst-time-inputs input[type="datetime-local"]:focus {
+  border-color: rgba(167, 87, 249, .4);
+  box-shadow: 0 0 0 3px rgba(167, 87, 249, .08);
+  outline: none;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .amethyst-rule-editor-sheet { animation: none; }
+  .amethyst-sheet-backdrop[data-motion-state="closing"] .amethyst-rule-editor-sheet { animation: none; }
+}
+
+/* ── Rule tiles stagger entrance ── */
+.rules-rail [role="listitem"],
+.rules-rail .rule-tile-wrap,
+.rules-rail > * {
+  animation: rule-tile-enter 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.rules-rail > *:nth-child(1) { animation-delay: 60ms; }
+.rules-rail > *:nth-child(2) { animation-delay: 120ms; }
+.rules-rail > *:nth-child(3) { animation-delay: 180ms; }
+.rules-rail > *:nth-child(4) { animation-delay: 240ms; }
+.rules-rail > *:nth-child(5) { animation-delay: 300ms; }
+.rules-rail > *:nth-child(6) { animation-delay: 360ms; }
+
+@keyframes rule-tile-enter {
+  from { transform: translateX(24px) scale(0.9); opacity: 0; }
+  to { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+/* Rule tile tap spring */
+.rules-rail > * {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.rules-rail > *:active {
+  transform: scale(0.93) !important;
+}
+
+/* Detail/editor sheet backdrop fade */
+.amethyst-sheet-backdrop {
+  animation: sheet-backdrop-fade 250ms ease-out both;
+}
+@keyframes sheet-backdrop-fade {
+  from { background-color: transparent; }
+}
+
+/* Rules list items slide in when viewing full list */
+.rules-list [role="listitem"],
+.rules-list > * {
+  animation: rules-list-slide 350ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.rules-list > *:nth-child(1) { animation-delay: 50ms; }
+.rules-list > *:nth-child(2) { animation-delay: 100ms; }
+.rules-list > *:nth-child(3) { animation-delay: 150ms; }
+.rules-list > *:nth-child(4) { animation-delay: 200ms; }
+.rules-list > *:nth-child(5) { animation-delay: 250ms; }
+
+@keyframes rules-list-slide {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* App group rows entrance */
+.app-group-list > * {
+  animation: group-row-enter 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.app-group-list > *:nth-child(1) { animation-delay: 80ms; }
+.app-group-list > *:nth-child(2) { animation-delay: 140ms; }
+.app-group-list > *:nth-child(3) { animation-delay: 200ms; }
+
+@keyframes group-row-enter {
+  from { transform: translateX(-10px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* App group row hover glow */
+.app-group-row {
+  transition: background-color 0.2s, transform 0.15s;
+}
+.app-group-row:active {
+  transform: scale(0.97);
+  background-color: rgba(167, 87, 249, 0.06) !important;
+}
+
+/* Blocked apps strip icons float */
+.blocked-apps-strip .app-glyph,
+.blocked-apps-strip__icons > * {
+  animation: strip-icon-bob 3s ease-in-out infinite;
+}
+.blocked-apps-strip .app-glyph:nth-child(odd),
+.blocked-apps-strip__icons > *:nth-child(odd) {
+  animation-delay: -1.5s;
+}
+
+@keyframes strip-icon-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* Header action button spring */
+.amethyst-header-action:active,
+.nested-screen-header > button:active,
+.nested-screen-header__add:active {
+  transform: scale(0.88);
+  transition: transform 0.1s;
+}
+.amethyst-header-action,
+.nested-screen-header > button,
+.nested-screen-header__add {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+}
+
+/* Rule tile calendar→shield flow icons */
+.amethyst-rule-tile__flow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--amethyst-lilac, #d4c8f0);
+}
+.amethyst-rule-tile__arrow {
+  color: rgba(212, 200, 240, .4);
+  font-size: 14px;
+}
+/* Active time pill with a teal highlight. */
+.amethyst-rule-tile__meta.is-active-time {
+  color: #6ee7c0;
+  background: rgba(110, 231, 192, .12);
+  border: 1px solid rgba(110, 231, 192, .18);
+}
+
+/* Rule detail sheet with a centered layout. */
+.amethyst-detail-close {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid #3c3c3c;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(15, 15, 15, .9);
+  font-size: 20px;
+  z-index: 2;
+}
+.amethyst-detail-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0 16px;
+  color: var(--amethyst-lilac, #d4c8f0);
+}
+.amethyst-detail-flow > span {
+  color: rgba(212, 200, 240, .35);
+  font-size: 16px;
+}
+.amethyst-detail-header-center {
+  text-align: center;
+  margin-bottom: 12px;
+}
+.amethyst-detail-header-center h2 {
+  margin: 0 0 6px;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -.8px;
+}
+.amethyst-detail-header-center p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 0;
+  color: #a8a3b4;
+  font-size: 13px;
+}
+.amethyst-detail-inline-icon {
+  display: inline-grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.amethyst-detail-inline-icon .amethyst-app-glyph {
+  width: 22px;
+  height: 22px;
+  padding: 5px;
+}
+.amethyst-detail-actions--stacked {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.amethyst-detail-unblock {
+  width: 100%;
+  min-height: 52px;
+  border: 1.5px solid rgba(212, 200, 240, .3);
+  border-radius: 16px;
+  color: #fff;
+  background: transparent;
+  font-size: 15px;
+  font-weight: 600;
+}
+.amethyst-detail-edit-link {
+  border: 0;
+  color: #a8a3b4;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+/* Apps empty state */
+.amethyst-apps-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 24px 40px;
+  margin: 0 -18px 30px;
+  text-align: center;
+  border: 1px solid rgba(167, 120, 231, .08);
+  border-radius: 24px;
+  background: linear-gradient(160deg, rgba(20, 16, 32, .7), rgba(8, 6, 14, .9));
+}
+.amethyst-apps-empty__icon {
+  display: grid;
+  width: 80px;
+  height: 80px;
+  place-items: center;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  color: rgba(167, 120, 231, .5);
+  background: rgba(167, 120, 231, .08);
+}
+.amethyst-apps-empty h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -.5px;
+}
+.amethyst-apps-empty p {
+  margin: 0 0 24px;
+  max-width: 260px;
+  color: rgba(212, 200, 240, .55);
+  font-size: 14px;
+  line-height: 1.45;
+}
+.amethyst-apps-empty__cta {
+  min-height: 48px;
+  padding: 0 28px;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 999px;
+  color: #fff;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+
+/* ══ Rules and apps — definitive Amethyst styling ══ */
+.amethyst-apps-screen {
+  background: #000 !important;
+}
+.amethyst-apps-header h1 {
+  color: #fff !important;
+}
+/* Blocked apps strip */
+.blocked-apps-strip {
+  background: transparent !important;
+  border: none !important;
+}
+.blocked-apps-strip__heading h2 {
+  color: #fff !important;
+}
+.blocked-apps-strip__lock {
+  color: #bcbbc0 !important;
+  background: rgba(255,255,255,.05) !important;
+}
+/* App chips */
+.blocked-app-chip__icon {
+  border-color: rgba(255,255,255,.12) !important;
+  box-shadow: none !important;
+}
+.blocked-app-chip strong {
+  color: #fff !important;
+}
+.blocked-app-chip small {
+  color: #bcbbc0 !important;
+}
+/* Schedule section */
+.apps-section__header h2 {
+  color: #fff !important;
+}
+.apps-text-action {
+  color: #bcbbc0 !important;
+  background: rgba(255,255,255,.05) !important;
+}
+/* Rule tiles */
+.amethyst-rule-tile {
+  border-color: rgba(255,255,255,.08) !important;
+  background: #0a0a0a !important;
+  box-shadow: none !important;
+}
+.amethyst-rule-tile--1,
+.amethyst-rule-tile--2,
+.amethyst-rule-tile--3 {
+  background: #0a0a0a !important;
+}
+.amethyst-rule-tile.is-selected {
+  border-color: rgba(255,255,255,.2) !important;
+}
+.amethyst-rule-tile__flow {
+  color: #bcbbc0 !important;
+}
+.amethyst-rule-tile__active {
+  color: #8cffdd !important;
+  background: rgba(140,255,221,.1) !important;
+}
+.amethyst-rule-tile__body strong {
+  color: #fff !important;
+}
+.amethyst-rule-tile__body small {
+  color: #bcbbc0 !important;
+}
+.amethyst-rule-tile__meta {
+  color: #bcbbc0 !important;
+  background: rgba(255,255,255,.05) !important;
+}
+.amethyst-rule-tile__meta.is-active-time {
+  color: #8cffdd !important;
+  background: rgba(140,255,221,.08) !important;
+  border-color: rgba(140,255,221,.15) !important;
+}
+/* Create tile */
+.rule-create-tile {
+  border-color: rgba(255,255,255,.08) !important;
+  background: #000 !important;
+  color: #bcbbc0 !important;
+}
+.rule-create-tile span {
+  color: #bcbbc0 !important;
+}
+/* Empty state */
+.amethyst-apps-empty {
+  border: none !important;
+  background: transparent !important;
+}
+.amethyst-apps-empty__icon {
+  color: #bcbbc0 !important;
+  background: rgba(255,255,255,.05) !important;
+}
+.amethyst-apps-empty h2 {
+  color: #fff !important;
+}
+.amethyst-apps-empty p {
+  color: #555 !important;
+}
+.amethyst-apps-empty__cta {
+  color: #000 !important;
+  background: #fff !important;
+  box-shadow: none !important;
+}
+/* Detail sheet */
+.amethyst-rule-detail-sheet,
+.amethyst-rule-editor-sheet {
+  border-color: rgba(255,255,255,.08) !important;
+  background: #0a0a0a !important;
+}
+.amethyst-detail-flow {
+  color: #bcbbc0 !important;
+}
+.amethyst-detail-rows {
+  border-color: rgba(255,255,255,.06) !important;
+  background: rgba(255,255,255,.02) !important;
+}
+.amethyst-detail-row {
+  border-bottom-color: rgba(255,255,255,.04) !important;
+}
+.amethyst-detail-row > span:nth-child(2) {
+  color: #fff !important;
+}
+.amethyst-detail-row > small {
+  color: #bcbbc0 !important;
+}
+.amethyst-detail-unblock {
+  border-color: rgba(255,255,255,.12) !important;
+  color: #fff !important;
+}
+.amethyst-detail-edit-link {
+  color: #bcbbc0 !important;
+}
+/* Glow ring — remove purple, use subtle white */
+.amethyst-glow-ring {
+  background: rgba(255,255,255,.04) !important;
+  box-shadow: none !important;
+}
+/* Sheet backdrop */
+.amethyst-sheet-backdrop {
+  background: rgba(0,0,0,.8) !important;
+}
+
+/* ── Item 8: Schedule section chevron ── */
+.amethyst-editor-row__chevron {
+  width: 18px !important;
+  height: 18px !important;
+  stroke: rgba(255,255,255,.35) !important;
+  stroke-width: 2.2 !important;
+  transition: transform 220ms cubic-bezier(.4,0,.2,1), stroke 220ms ease !important;
+}
+.amethyst-editor-row__chevron.is-open {
+  transform: rotate(180deg) !important;
+  stroke: #b39aff !important;
+}
+
+/* ── Item 9: Custom websites input — app-native styling ── */
+.amethyst-domain-editor {
+  margin-top: 16px;
+}
+.amethyst-domain-editor strong {
+  display: block;
+  margin-bottom: 10px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+.amethyst-domain-editor__row {
+  display: flex;
+  gap: 8px;
+}
+.amethyst-domain-editor__input {
+  flex: 1;
+  min-height: 46px;
+  padding: 0 14px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 14px;
+  color: #fff;
+  background: rgba(255,255,255,.04);
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.amethyst-domain-editor__input::placeholder {
+  color: rgba(255,255,255,.25);
+}
+.amethyst-domain-editor__input:focus {
+  border-color: rgba(179,154,255,.4);
+  box-shadow: 0 0 0 3px rgba(179,154,255,.08);
+}
+.amethyst-domain-editor__add {
+  min-width: 58px;
+  min-height: 46px;
+  padding: 0 14px;
+  border: 1px solid rgba(179,154,255,.25);
+  border-radius: 14px;
+  color: #b39aff;
+  background: rgba(179,154,255,.08);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background .15s ease, border-color .15s ease;
+}
+.amethyst-domain-editor__add:active {
+  background: rgba(179,154,255,.16);
+}
+.amethyst-domain-editor__list {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.amethyst-domain-editor__list li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  background: rgba(255,255,255,.04);
+  color: #bcbbc0;
+  font-size: 12px;
+}
+.amethyst-domain-editor__list li button {
+  display: grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  border: none;
+  border-radius: 50%;
+  color: #ff9a8c;
+  background: rgba(255,100,80,.12);
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* ── Item 10: One-time schedule overflow fix ── */
+.amethyst-editor-segment--when {
+  grid-template-columns: 1fr 1fr 1fr !important;
+}
+.amethyst-editor-row__body {
+  overflow: hidden !important;
+}
+.amethyst-time-inputs--oneoff {
+  grid-template-columns: 1fr !important;
+}
+.amethyst-time-inputs--oneoff input[type="datetime-local"] {
+  width: 100% !important;
+  min-height: 46px;
+  padding: 0 10px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 13px;
+  color: #fff;
+  color-scheme: dark;
+  background: rgba(255,255,255,.04);
+  font: inherit;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  box-sizing: border-box;
+}
+
+/* ── Item 11: Pauses stepper spacing ── */
+.amethyst-pauses-field {
+  margin-top: 18px !important;
+}

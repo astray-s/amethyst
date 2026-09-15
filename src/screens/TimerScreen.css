@@ -1,0 +1,1603 @@
+.timer-screen--live {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 480px);
+  min-height: 100dvh;
+  margin: 0 auto;
+  overflow-x: clip;
+  padding: max(24px, env(safe-area-inset-top)) 20px 128px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 50% 16%, rgba(106, 64, 190, .26), transparent 29rem),
+    radial-gradient(circle at 78% 25%, rgba(38, 111, 190, .13), transparent 22rem),
+    linear-gradient(180deg, #0b0917 0 41%, #020208 66%, #000 100%);
+}
+
+.timer-screen--live::before {
+  position: absolute;
+  z-index: -2;
+  inset: 52px -72px auto;
+  height: 410px;
+  content: "";
+  opacity: .94;
+  background:
+    radial-gradient(ellipse at 2% 30%, #292631 0 16%, #141421 31%, transparent 47%),
+    radial-gradient(ellipse at 100% 21%, #242735 0 17%, #111526 33%, transparent 48%),
+    radial-gradient(ellipse at 48% 104%, #171421 0 23%, transparent 46%),
+    linear-gradient(118deg, transparent 0 17%, rgba(48, 43, 63, .72) 29% 37%, transparent 51%),
+    linear-gradient(-117deg, transparent 0 18%, rgba(38, 45, 67, .75) 30% 40%, transparent 53%);
+  filter: saturate(.88);
+  mask-image: linear-gradient(to bottom, #000 0 80%, transparent 100%);
+}
+
+.timer-screen--live::after {
+  position: absolute;
+  z-index: -1;
+  top: 76px;
+  left: 50%;
+  width: 390px;
+  height: 390px;
+  border-radius: 50%;
+  content: "";
+  transform: translateX(-50%);
+  background:
+    radial-gradient(circle, rgba(103, 70, 190, .21) 0 34%, rgba(45, 119, 200, .09) 49%, transparent 69%);
+  box-shadow: inset 0 0 78px rgba(199, 152, 255, .08), 0 0 90px rgba(85, 74, 190, .09);
+  filter: blur(3px);
+}
+
+.timer-screen--live .timer-header {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timer-screen--live .timer-header h1 {
+  margin: 0;
+  font-size: 31px;
+  font-weight: 600;
+  letter-spacing: -1.4px;
+}
+
+.timer-header__status {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid rgba(203, 187, 255, .28);
+  border-radius: 50%;
+  color: #e6ddff;
+  background: rgba(17, 19, 34, .58);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .08);
+  backdrop-filter: blur(18px);
+  font-size: 17px;
+}
+
+
+
+
+
+
+
+.timer-lcd {
+  position: absolute;
+  top: 99px;
+  z-index: 3;
+  display: grid;
+  min-width: 232px;
+  height: 101px;
+  padding: 0 22px;
+  place-items: center;
+  border: 4px solid #24242c;
+  border-radius: 25px;
+  background:
+    linear-gradient(116deg, rgba(255, 255, 255, .54), transparent 23%),
+    linear-gradient(180deg, rgba(206, 227, 255, .92), rgba(126, 169, 202, .89));
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, .67),
+    inset 0 -12px 24px rgba(56, 73, 109, .2),
+    0 9px 0 #17171e,
+    0 19px 34px rgba(0, 0, 0, .54),
+    0 0 30px rgba(117, 100, 234, .12);
+  backdrop-filter: blur(14px);
+}
+
+.timer-lcd span {
+  color: #0b0b12;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 51px;
+  font-weight: 700;
+  letter-spacing: -4px;
+}
+
+.timer-lcd.is-running {
+  animation: timer-lcd-live 2.3s ease-in-out infinite;
+}
+
+
+.timer-duration {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  max-width: 330px;
+  margin: 0 auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.timer-duration button {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgba(205, 191, 255, .12);
+  border-radius: 50%;
+  color: #f5f2ff;
+  background: rgba(14, 15, 26, .72);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .06);
+  backdrop-filter: blur(16px);
+  font-size: 27px;
+  font-weight: 300;
+}
+
+.timer-duration button:last-child {
+  justify-self: end;
+}
+
+.timer-duration button:disabled {
+  opacity: .28;
+}
+
+.timer-duration > div {
+  display: grid;
+  min-height: 48px;
+  place-items: center;
+  border: 1px solid rgba(211, 197, 255, .07);
+  border-radius: 999px;
+  background: rgba(14, 13, 21, .62);
+  backdrop-filter: blur(14px);
+}
+
+.timer-duration strong {
+  color: #fff;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: -.8px;
+}
+
+.timer-primary {
+  display: flex;
+  width: 100%;
+  height: 54px;
+  margin: 17px 0 12px;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  border: 1px solid rgba(255, 255, 255, .58);
+  border-radius: 999px;
+  color: #130f20;
+  background: linear-gradient(180deg, rgba(251, 248, 255, .98), rgba(226, 217, 255, .94));
+  box-shadow: 0 10px 30px rgba(68, 40, 128, .22), inset 0 1px rgba(255, 255, 255, .9);
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.timer-primary span {
+  font-size: 12px;
+}
+
+.timer-primary--stop {
+  color: #fff;
+  border-color: rgba(255, 171, 199, .28);
+  background: rgba(119, 41, 72, .78);
+  box-shadow: none;
+}
+
+#timer-error {
+  margin: 7px 12px 0;
+  color: #ffb7cb;
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.timer-block-pill {
+  display: grid;
+  width: fit-content;
+  min-width: 110px;
+  min-height: 38px;
+  margin: 0 auto;
+  padding: 0 14px;
+  grid-template-columns: 18px auto auto;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(205, 190, 255, .12);
+  border-radius: 999px;
+  color: #eee8ff;
+  background: rgba(18, 17, 29, .68);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .05);
+  backdrop-filter: blur(18px);
+  font-size: 12px;
+}
+
+.timer-block-pill span {
+  color: #c7b8ff;
+  font-size: 13px;
+}
+
+.timer-block-pill b {
+  font-weight: 600;
+}
+
+.timer-block-pill strong {
+  color: #88839a;
+  font-weight: 500;
+}
+
+.timer-block-pill.is-active {
+  border-color: rgba(169, 143, 255, .28);
+  background: rgba(62, 42, 98, .7);
+}
+
+.timer-block-pill.is-active strong {
+  color: #b5eeff;
+}
+
+.timer-collections {
+  margin-top: 26px;
+}
+
+.timer-collections__heading {
+  display: flex;
+  margin-bottom: 12px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.timer-collections__heading h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -.55px;
+}
+
+.timer-collections__heading span {
+  color: #8f8a9b;
+  font-size: 11px;
+}
+
+.timer-preset-rail {
+  display: flex;
+  margin-right: -20px;
+  padding: 0 20px 3px 0;
+  gap: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.timer-preset-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.timer-preset-card {
+  position: relative;
+  flex: 0 0 226px;
+  min-height: 260px;
+  overflow: hidden;
+  padding: 16px;
+  border: 1px solid rgba(205, 190, 255, .15);
+  border-radius: 24px;
+  color: #fff;
+  background: #171426;
+  text-align: left;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .07);
+}
+
+.timer-preset-card::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  opacity: .9;
+  background: var(--preset-art) center/cover;
+}
+
+.timer-preset-card::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(180deg, rgba(3, 4, 12, .02) 24%, rgba(3, 3, 10, .88) 100%);
+}
+
+.timer-preset-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.timer-preset-card.is-selected {
+  border-color: rgba(199, 179, 255, .62);
+  box-shadow: 0 0 0 1px rgba(172, 143, 255, .13), 0 14px 38px rgba(23, 12, 55, .28);
+}
+
+.timer-preset-card:disabled {
+  opacity: .48;
+}
+
+.timer-preset-card__minutes {
+  display: inline-flex;
+  padding: 5px 8px;
+  border: 1px solid rgba(240, 234, 255, .22);
+  border-radius: 999px;
+  background: rgba(4, 4, 14, .26);
+  backdrop-filter: blur(10px);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.timer-preset-card strong {
+  display: block;
+  margin-top: 166px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -.65px;
+}
+
+.timer-preset-card small {
+  display: block;
+  margin-top: 3px;
+  color: rgba(238, 233, 255, .72);
+  font-size: 11px;
+}
+
+.timer-sheet-backdrop,
+.timer-reward {
+  position: fixed;
+  z-index: 45;
+  inset: 0;
+  display: flex;
+  padding: 14px 14px 24px;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(0, 0, 7, .72);
+  backdrop-filter: blur(12px);
+  animation: timer-backdrop-in 180ms ease-out both;
+}
+
+.timer-sheet {
+  position: relative;
+  width: min(100%, 440px);
+  max-height: calc(100vh - 28px);
+  overflow: auto;
+  padding: 12px 19px calc(20px + env(safe-area-inset-bottom));
+  border: 1px solid rgba(199, 180, 255, .19);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 50% 0, rgba(101, 63, 166, .17), transparent 34%),
+    rgba(15, 13, 25, .96);
+  box-shadow: 0 -18px 50px rgba(0, 0, 0, .48);
+  animation: timer-sheet-in 280ms cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.timer-sheet-backdrop[data-motion-state="closing"] {
+  animation: timer-backdrop-out 220ms ease-in both;
+}
+
+.timer-sheet-backdrop[data-motion-state="closing"] .timer-sheet {
+  animation: timer-sheet-out 220ms cubic-bezier(.4, 0, 1, 1) both;
+}
+
+.timer-sheet.is-starting {
+  animation: timer-sheet-start 220ms cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.timer-screen--live{background:radial-gradient(ellipse at 50% 17%,rgba(112,77,191,.23),transparent 25rem),radial-gradient(ellipse at 80% 18%,rgba(49,119,187,.1),transparent 21rem),linear-gradient(180deg,#0a0b12 0 42%,#030306 69%,#000 100%)!important}
+.timer-screen--live::before{opacity:1!important;background:radial-gradient(ellipse at 0 28%,#302f37 0 14%,#15151e 30%,transparent 47%),radial-gradient(ellipse at 100% 19%,#292d38 0 16%,#121622 34%,transparent 49%),radial-gradient(ellipse at 49% 106%,#1a1722 0 23%,transparent 46%),linear-gradient(117deg,transparent 0 17%,rgba(48,43,63,.88) 29% 38%,transparent 52%),linear-gradient(-117deg,transparent 0 18%,rgba(35,42,59,.88) 30% 41%,transparent 54%)!important}
+.timer-lcd{top:96px!important;min-width:242px!important;height:108px!important;border-color:#292932!important;border-radius:27px!important;box-shadow:inset 0 2px 4px rgba(255,255,255,.62),inset 0 -14px 25px rgba(56,73,109,.23),0 9px 0 #14141b,0 20px 36px rgba(0,0,0,.6),0 0 32px rgba(129,100,232,.16)!important}
+.timer-lcd span{font-size:53px!important}
+.timer-duration>div{background:rgba(12,12,18,.78)!important}
+.timer-primary{box-shadow:0 11px 32px rgba(76,43,146,.25),inset 0 1px rgba(255,255,255,.92)!important}
+.timer-preset-card{border-radius:22px!important;box-shadow:inset 0 1px rgba(255,255,255,.07),0 13px 28px rgba(0,0,0,.2)!important}
+
+.timer-sheet__handle {
+  width: 38px;
+  height: 4px;
+  margin: 0 auto 17px;
+  border-radius: 999px;
+  background: #5b5668;
+}
+
+.timer-sheet__close {
+  position: absolute;
+  top: 19px;
+  right: 19px;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(52, 45, 72, .74);
+  font-size: 22px;
+}
+
+.timer-sheet__eyebrow,
+.timer-reward__eyebrow {
+  color: #c4b4ff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.timer-sheet h2 {
+  margin: 4px 0 0;
+  font-size: 27px;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+.timer-sheet > p {
+  margin: 7px 0 20px;
+  color: #aaa4b4;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.timer-sheet__facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.timer-sheet__facts div {
+  padding: 13px;
+  border: 1px solid rgba(202, 184, 255, .13);
+  border-radius: 14px;
+  background: rgba(7, 7, 15, .62);
+}
+
+.timer-sheet__facts span,
+.timer-sheet__facts strong {
+  display: block;
+}
+
+.timer-sheet__facts span,
+.timer-sheet__rule > span {
+  color: #9690a0;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+}
+
+.timer-sheet__facts strong {
+  margin-top: 5px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.timer-sheet__toggle {
+  display: flex;
+  width: 100%;
+  margin: 15px 0;
+  padding: 12px 0;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  border-top: 1px solid rgba(202, 184, 255, .12);
+  border-bottom: 1px solid rgba(202, 184, 255, .12);
+  color: #fff;
+  background: transparent;
+  text-align: left;
+}
+
+.timer-sheet__toggle small {
+  display: block;
+  margin-top: 3px;
+  color: #938d9c;
+  font-size: 11px;
+}
+
+.timer-sheet__toggle i {
+  width: 35px;
+  height: 21px;
+  border-radius: 999px;
+  background: #413c49;
+}
+
+.timer-sheet__toggle.is-active i {
+  background: #a991ff;
+  box-shadow: inset 14px 0 0 #251b3c;
+}
+
+.timer-sheet__rule {
+  display: grid;
+  margin: -2px 0 15px;
+  gap: 7px;
+}
+
+.timer-sheet__rule select {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 11px;
+  border: 1px solid rgba(205, 189, 255, .18);
+  border-radius: 12px;
+  color: #fff;
+  background: #0b0a12;
+}
+
+.timer-sheet__error {
+  margin: -3px 0 13px !important;
+  color: #ffadc8 !important;
+  text-align: left;
+}
+
+.timer-hold {
+  position: relative;
+  width: 100%;
+  min-height: 56px;
+  overflow: hidden;
+  isolation: isolate;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  border: 0;
+  border-radius: 999px;
+  color: #130f20;
+  background: linear-gradient(180deg, #f4efff, #dcd0ff);
+  font-size: 15px;
+  font-weight: 700;
+  touch-action: none;
+}
+
+.timer-hold::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--hold-progress, 0%);
+  border-radius: inherit;
+  content: "";
+  background: rgba(126, 91, 222, .3);
+  transition: width 80ms linear;
+}
+
+.timer-hold span {
+  position: relative;
+  z-index: 1;
+}
+
+.timer-hold.is-starting {
+  color: #f5f0ff;
+  background: linear-gradient(180deg, #5e3b96, #34204f);
+}
+
+.timer-reward {
+  z-index: 60;
+  padding: 34px 28px;
+  align-items: center;
+  background: rgba(2, 1, 9, .92);
+  text-align: center;
+}
+
+.timer-reward__content {
+  display: flex;
+  width: min(100%, 350px);
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer-reward h2 {
+  margin: 8px 0 0;
+  font-size: 37px;
+  font-weight: 600;
+  letter-spacing: -1.6px;
+}
+
+.timer-reward p {
+  margin: 8px 0 18px;
+  color: #aaa4b4;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.timer-reward img {
+  width: min(70vw, 286px);
+  height: min(70vw, 286px);
+  object-fit: contain;
+  filter: drop-shadow(0 18px 30px rgba(153, 92, 255, .2));
+  animation: timer-reward-gem 3.4s ease-in-out infinite;
+}
+
+.timer-reward button {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 15px;
+  border: 0;
+  border-radius: 999px;
+  color: #130f20;
+  background: #e7deff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+@keyframes timer-gem {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-7px) rotate(1deg); }
+}
+
+@keyframes timer-beam {
+  0%, 100% { opacity: .52; transform: scale(.94); }
+  50% { opacity: .9; transform: scale(1.07); }
+}
+
+@keyframes timer-lcd-live {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.08); }
+}
+
+@keyframes timer-sheet-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes timer-sheet-out {
+  to { opacity: 0; transform: translateY(28px) scale(.985); }
+}
+
+@keyframes timer-sheet-start {
+  45% { transform: translateY(0) scale(.985); filter: brightness(1.12); }
+  100% { transform: translateY(10px) scale(.98); opacity: 0; }
+}
+
+@keyframes timer-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes timer-backdrop-out {
+  to { opacity: 0; }
+}
+
+@keyframes timer-reward-gem {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.025); }
+}
+
+@media (max-width: 360px) {
+  .timer-screen--live { padding-inline: 15px; }
+  .timer-cave { margin-inline: -15px; }
+  .timer-preset-rail { margin-right: -15px; padding-right: 15px; }
+  .timer-preset-card { flex-basis: 210px; }
+}
+
+@media (max-width: 380px) {
+  .timer-screen--live {
+    padding-top: max(17px, env(safe-area-inset-top));
+  }
+
+  .timer-screen--live .timer-header {
+    min-height: 48px;
+  }
+
+  .timer-screen--live .timer-header h1 {
+    font-size: 28px;
+  }
+
+  .timer-header__status {
+    width: 38px;
+    height: 38px;
+  }
+
+  .timer-cave {
+    min-height: 270px;
+    margin-top: -7px;
+    margin-bottom: -18px;
+  }
+
+  .timer-cave__gem {
+    top: 61px;
+    width: 154px;
+    height: 154px;
+  }
+
+  .timer-lcd {
+    top: 77px;
+    min-width: 210px;
+    height: 88px;
+    border-radius: 22px;
+  }
+
+  .timer-lcd span {
+    font-size: 45px;
+  }
+
+  .timer-cave__label {
+    bottom: 23px;
+  }
+
+  .timer-duration {
+    max-width: 305px;
+  }
+
+  .timer-primary {
+    margin-top: 14px;
+  }
+
+  .timer-collections {
+    margin-top: 21px;
+  }
+
+  .timer-preset-card {
+    flex-basis: 202px;
+    min-height: 230px;
+  }
+
+  .timer-preset-card strong {
+    margin-top: 139px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timer-cave__beam,
+  .timer-cave__gem,
+  .timer-lcd.is-running,
+  .timer-sheet,
+  .timer-reward img {
+    animation: none;
+  }
+}
+
+.timer-screen--live {
+  padding-top: max(16px, env(safe-area-inset-top));
+  background:
+    linear-gradient(180deg, rgba(14, 16, 24, .84), rgba(2, 3, 5, .98) 43%, #000 66%);
+}
+
+.timer-screen--live::before {
+  inset: 54px 0 auto;
+  width: 100%;
+  height: 370px;
+  opacity: .78;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, .8), transparent 27% 72%, rgba(0, 0, 0, .85)),
+    url("/assets/amethyst-cave-backdrop.jpg") center top / cover no-repeat,
+    radial-gradient(ellipse at 54% 20%, rgba(78, 94, 130, .3), transparent 37%),
+    linear-gradient(#171d23, #020304);
+  filter: saturate(.7) brightness(.72);
+  mask-image: linear-gradient(to bottom, #000 0 78%, transparent 100%);
+}
+
+.timer-screen--live::after {
+  display: none;
+}
+
+.timer-screen--live .timer-header {
+  min-height: 50px;
+}
+
+.timer-screen--live .timer-header h1 {
+  font-size: 29px;
+  font-weight: 620;
+}
+
+.timer-header__status {
+  width: 38px;
+  height: 38px;
+  border-color: rgba(209, 201, 239, .2);
+  background: rgba(12, 13, 15, .68);
+  box-shadow: none;
+}
+
+
+
+
+
+
+
+.timer-screen--live[data-session-phase="starting"] .timer-cave__beam {
+  animation: timer-beam 300ms ease-out 2;
+}
+
+.timer-screen--live[data-session-phase="starting"] .timer-cave__gem {
+  animation: timer-gem 420ms cubic-bezier(.2, .8, .2, 1) 1;
+}
+
+.timer-lcd {
+  top: 84px;
+  min-width: 232px;
+  height: 96px;
+  padding: 0 20px;
+  border: 6px solid #2a2333;
+  border-radius: 26px;
+  background:
+    linear-gradient(118deg, rgba(245, 236, 255, .2), transparent 20%),
+    radial-gradient(ellipse at 50% 7%, rgba(214, 190, 245, .2), transparent 43%),
+    linear-gradient(180deg, #6d5a94, #3a2a5c);
+  box-shadow:
+    inset 0 2px rgba(238, 226, 255, .16),
+    inset 0 -11px 16px rgba(0, 0, 0, .24),
+    0 8px 0 #14111c,
+    0 19px 27px rgba(0, 0, 0, .6);
+}
+
+.timer-lcd span {
+  color: #f5eeff;
+  font-size: 49px;
+  font-weight: 650;
+  letter-spacing: -4px;
+  text-shadow: 0 0 14px rgba(203, 168, 255, .5);
+}
+
+.timer-lcd.is-starting {
+  animation: timer-lcd-start 220ms ease-out both;
+}
+
+@keyframes timer-lcd-start {
+  45% { transform: scale(.975); filter: brightness(1.22); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+.timer-duration {
+  grid-template-columns: 44px 1fr 44px;
+  max-width: 300px;
+  gap: 13px;
+}
+
+.timer-duration button {
+  width: 42px;
+  height: 42px;
+  border-color: rgba(255, 255, 255, .08);
+  background: rgba(27, 28, 31, .95);
+  box-shadow: none;
+  font-size: 25px;
+}
+
+.timer-duration > div {
+  min-height: 43px;
+  border-color: rgba(255, 255, 255, .08);
+  background: rgba(19, 20, 22, .97);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .04);
+}
+
+.timer-duration strong {
+  font-size: 23px;
+}
+
+.timer-primary {
+  height: 50px;
+  margin: 16px 0 11px;
+  border-color: rgba(255, 255, 255, .72);
+  color: #111215;
+  background: #f3f2f2;
+  box-shadow: none;
+  font-size: 15px;
+}
+
+.timer-primary--stop {
+  color: #fff;
+  border-color: rgba(233, 186, 205, .3);
+  background: #6f2948;
+}
+
+.timer-block-pill {
+  min-height: 34px;
+  padding: 0 12px;
+  border-color: rgba(255, 255, 255, .08);
+  background: #151619;
+  box-shadow: none;
+}
+
+.timer-block-pill span,
+.timer-block-pill.is-active strong {
+  color: #b8a7e9;
+}
+
+.timer-collections {
+  margin-top: 31px;
+}
+
+.timer-collections__heading h2 {
+  font-size: 19px;
+}
+
+.timer-preset-card {
+  flex-basis: 204px;
+  min-height: 232px;
+  border-color: rgba(216, 208, 238, .18);
+  border-radius: 20px;
+  background: #141519;
+  box-shadow: none;
+}
+
+.timer-preset-card::before {
+  opacity: .72;
+  filter: saturate(.6) brightness(.82);
+}
+
+.timer-preset-card.is-selected {
+  border-color: rgba(196, 179, 240, .58);
+  box-shadow: 0 0 0 1px rgba(196, 179, 240, .08);
+}
+
+.timer-preset-card strong {
+  margin-top: 141px;
+  font-size: 18px;
+}
+
+@media (max-width: 380px) {
+  .timer-cave {
+    min-height: 260px;
+    margin-top: -3px;
+    margin-bottom: -10px;
+  }
+
+  .timer-lcd {
+    top: 77px;
+    min-width: 218px;
+    height: 90px;
+  }
+
+  .timer-lcd span {
+    font-size: 45px;
+  }
+}
+.timer-block-pill{box-shadow:0 11px 25px rgba(84,61,139,.16),inset 0 1px rgba(255,255,255,.06)!important}
+
+.timer-screen--live {
+  padding: max(16px, env(safe-area-inset-top)) 18px 126px;
+  background:
+    radial-gradient(ellipse at 50% 14%, rgba(81, 61, 133, .13), transparent 23rem),
+    linear-gradient(180deg, #090a0f 0 34%, #020204 54%, #000 100%);
+}
+
+.timer-screen--live::before {
+  inset: 62px -28px auto;
+  width: auto;
+  height: 294px;
+  opacity: .96;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, .74), transparent 25% 74%, rgba(0, 0, 0, .8)),
+    url("/assets/amethyst-cave-backdrop.jpg") center top / cover no-repeat,
+    radial-gradient(ellipse at 51% 28%, rgba(83, 81, 113, .28), transparent 43%),
+    linear-gradient(180deg, #1a1b22, #050507);
+  filter: saturate(.62) brightness(.68);
+  mask-image: linear-gradient(to bottom, #000 0 79%, transparent 100%);
+}
+
+.timer-screen--live .timer-header h1 { font-size: 31px; letter-spacing: -1.3px; }
+
+
+
+
+
+.timer-lcd {
+  top: 73px;
+  min-width: 218px;
+  height: 91px;
+  padding-inline: 19px;
+  border-width: 5px;
+  border-radius: 24px;
+  background:
+    linear-gradient(118deg, rgba(240, 227, 255, .18), transparent 21%),
+    radial-gradient(ellipse at 50% 4%, rgba(210, 180, 245, .17), transparent 45%),
+    linear-gradient(180deg, #6d5a94, #3a2a5c);
+  box-shadow:
+    inset 0 2px rgba(233, 216, 255, .15),
+    inset 0 -10px 17px rgba(0, 0, 0, .25),
+    0 7px 0 #14111c,
+    0 17px 27px rgba(0, 0, 0, .63),
+    0 0 20px rgba(151, 100, 220, .12);
+}
+
+.timer-lcd span { font-size: 45px; }
+.timer-duration { max-width: 286px; }
+.timer-primary { margin-top: 15px; }
+
+.timer-block-pill {
+  box-shadow:
+    0 10px 23px rgba(71, 51, 117, .12),
+    inset 0 1px rgba(255, 255, 255, .05) !important;
+}
+
+.timer-collections { margin-top: 27px; }
+
+.timer-preset-card {
+  flex-basis: 184px;
+  min-height: 215px;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, transparent 42%, rgba(8, 8, 13, .96) 84%),
+    #13131a;
+}
+
+.timer-preset-card strong { margin-top: 126px; font-size: 16px; }
+.timer-preset-card small { font-size: 11px; }
+
+/* ── Breathing gem during active session ── */
+@keyframes timer-gem-breathe {
+  0%, 100% { transform: translateX(-50%) scale(1); filter: drop-shadow(0 0 12px rgba(167, 87, 249, 0.3)); }
+  50% { transform: translateX(-50%) scale(1.05); filter: drop-shadow(0 0 24px rgba(167, 87, 249, 0.6)) drop-shadow(0 0 48px rgba(167, 87, 249, 0.2)); }
+}
+
+/* Pulsing beam intensifies when running */
+@keyframes timer-beam-pulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 0.7; transform: scaleY(1.06); filter: brightness(1.2); }
+}
+
+/* LCD countdown gentle glow pulse when running */
+.timer-lcd.is-running span {
+  animation: timer-lcd-glow 2s ease-in-out infinite;
+}
+@keyframes timer-lcd-glow {
+  0%, 100% { text-shadow: 0 0 8px rgba(207, 172, 255, 0.3); }
+  50% { text-shadow: 0 0 16px rgba(207, 172, 255, 0.6), 0 0 32px rgba(167, 87, 249, 0.2); }
+}
+
+/* Session start — gem drops in with bounce */
+@keyframes timer-gem-drop {
+  from { transform: translateX(-50%) translateY(-40px) scale(0.6); opacity: 0; }
+  to { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
+}
+
+/* Start button ripple effect */
+.timer-primary {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.timer-primary:active {
+  transform: scale(0.95) !important;
+}
+
+/* Stop button danger pulse */
+.timer-primary--stop {
+  animation: timer-stop-pulse 1.5s ease-in-out infinite;
+}
+@keyframes timer-stop-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 87, 117, 0.3); }
+  50% { box-shadow: 0 0 0 8px rgba(255, 87, 117, 0); }
+}
+
+/* Duration +/- buttons bounce */
+.timer-duration button:active {
+  transform: scale(0.85);
+  transition: transform 0.1s;
+}
+.timer-duration button {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Block pill toggle animation */
+.timer-block-pill {
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.15s;
+}
+.timer-block-pill:active {
+  transform: scale(0.93);
+}
+.timer-block-pill.is-active {
+  box-shadow: 0 0 12px rgba(167, 87, 249, 0.3), inset 0 0 8px rgba(167, 87, 249, 0.1);
+}
+
+/* Preset rail cards hover/tap */
+.timer-preset-card {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+}
+.timer-preset-card:active {
+  transform: scale(0.94);
+}
+.timer-preset-card.is-selected {
+  animation: timer-preset-selected 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes timer-preset-selected {
+  0% { transform: scale(0.94); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+/* Background ambient particles */
+.timer-screen--live::before {
+  animation: timer-ambient-drift 20s linear infinite !important;
+}
+@keyframes timer-ambient-drift {
+  from { background-position: 0 0, 50px 50px; }
+  to { background-position: 100px 200px, 150px 250px; }
+}
+
+
+/* ── Fix 6: Clean circular progress ring redesign ── */
+
+
+
+
+
+
+
+
+
+
+@keyframes timer-gem-subtle {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-4px); }
+}
+
+.timer-lcd {
+  position: absolute !important;
+  top: auto !important;
+  bottom: 46px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: grid !important;
+  min-width: auto !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  place-items: center;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.timer-lcd span {
+  color: #f5eeff !important;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 58px !important;
+  font-weight: 680 !important;
+  letter-spacing: -3px !important;
+  text-shadow: 0 0 18px rgba(183, 140, 255, .4), 0 0 42px rgba(120, 80, 200, .15) !important;
+}
+
+.timer-lcd.is-running span {
+  animation: timer-lcd-glow-ring 2.4s ease-in-out infinite !important;
+}
+
+@keyframes timer-lcd-glow-ring {
+  0%, 100% { text-shadow: 0 0 14px rgba(183, 140, 255, .3), 0 0 36px rgba(120, 80, 200, .1); }
+  50% { text-shadow: 0 0 22px rgba(183, 140, 255, .55), 0 0 48px rgba(120, 80, 200, .2); }
+}
+
+
+/* Start button: gradient purple pill */
+.timer-primary {
+  border: none !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, #8c5bdc 0%, #6d3ebf 40%, #4f60b8 100%) !important;
+  box-shadow: 0 8px 24px rgba(140, 91, 220, .3), inset 0 1px rgba(255, 255, 255, .15) !important;
+  font-weight: 660 !important;
+}
+
+.timer-primary:active {
+  box-shadow: 0 4px 12px rgba(140, 91, 220, .2) !important;
+}
+
+.timer-primary--stop {
+  color: #fff !important;
+  border: none !important;
+  background: rgba(119, 41, 72, .82) !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 380px) {
+  .timer-cave__ring-wrap {
+    width: 230px;
+    height: 230px;
+  }
+  .timer-cave__gem {
+    top: 16px !important;
+    width: 62px !important;
+    height: 62px !important;
+  }
+  .timer-lcd span {
+    font-size: 50px !important;
+  }
+}
+
+
+.timer-screen--live {
+  background: linear-gradient(180deg, #080610 0%, #030308 50%, #000 100%) !important;
+}
+.timer-screen--live::before,
+.timer-screen--live::after {
+  display: none !important;
+}
+@keyframes timer-gem-float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-5px); }
+}
+.timer-lcd {
+  position: absolute !important;
+  top: auto !important;
+  bottom: 50px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 3;
+  display: grid !important;
+  min-width: auto !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  place-items: center;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+.timer-lcd span {
+  color: #f0e8ff !important;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 56px !important;
+  font-weight: 700 !important;
+  letter-spacing: -3px !important;
+  text-shadow: 0 0 16px rgba(167, 120, 231, .35), 0 0 40px rgba(120, 80, 200, .12) !important;
+}
+.timer-lcd.is-running span {
+  animation: timer-lcd-pulse 2.5s ease-in-out infinite !important;
+}
+@keyframes timer-lcd-pulse {
+  0%, 100% { text-shadow: 0 0 12px rgba(167, 120, 231, .25), 0 0 34px rgba(120, 80, 200, .08); }
+  50% { text-shadow: 0 0 20px rgba(167, 120, 231, .5), 0 0 46px rgba(120, 80, 200, .18); }
+}
+/* Start button — gradient purple pill */
+.timer-primary {
+  border: none !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, #8c5bdc 0%, #6d3ebf 40%, #4f60b8 100%) !important;
+  box-shadow: 0 8px 24px rgba(140, 91, 220, .3), inset 0 1px rgba(255, 255, 255, .12) !important;
+  font-weight: 650 !important;
+}
+.timer-primary:active {
+  box-shadow: 0 4px 12px rgba(140, 91, 220, .2) !important;
+}
+.timer-primary--stop {
+  color: #fff !important;
+  border: none !important;
+  background: rgba(119, 41, 72, .8) !important;
+  box-shadow: none !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   TIMER SCREEN — definitive Amethyst override
+   Replaces all cave/LCD chrome with clean ring + countdown
+   ══════════════════════════════════════════════════════ */
+
+.timer-screen--live {
+  background: #050508 !important;
+}
+.timer-screen--live::before,
+.timer-screen--live::after {
+  display: none !important;
+}
+
+
+/* Ring wrapper — centered circle container */
+.timer-cave {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0 8px;
+}
+
+.timer-cave__ring-wrap {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-cave__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.timer-cave__ring-track {
+  stroke: rgba(255, 255, 255, 0.06);
+}
+
+.timer-cave__ring-progress {
+  stroke: rgba(167, 120, 231, 0.85);
+  filter: drop-shadow(0 0 6px rgba(167, 120, 231, 0.5));
+  transition: stroke-dashoffset 1s linear;
+}
+
+/* Countdown text — large, centered, clean */
+.timer-cave__countdown {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.timer-cave__countdown span {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 52px;
+  font-weight: 680;
+  letter-spacing: -3px;
+  color: #f5eeff;
+  text-shadow: 0 0 18px rgba(183, 140, 255, 0.4);
+}
+
+.timer-cave__countdown.is-running span {
+  animation: timer-lcd-glow-ring 2.4s ease-in-out infinite;
+}
+
+/* Label below ring */
+.timer-cave__label {
+  margin-top: 12px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+/* Duration stepper — minimal */
+.timer-duration {
+  margin-top: 8px !important;
+}
+.timer-duration button {
+  width: 40px !important;
+  height: 40px !important;
+  border-color: rgba(167, 120, 231, .15) !important;
+  background: rgba(167, 120, 231, .06) !important;
+}
+.timer-duration > div {
+  border-color: rgba(167, 120, 231, .08) !important;
+  background: rgba(167, 120, 231, .04) !important;
+}
+
+/* Start button — high-contrast light pill. */
+.timer-primary {
+  height: 52px !important;
+  margin: 14px 0 10px !important;
+  border: none !important;
+  border-radius: 999px !important;
+  color: #0a0812 !important;
+  background: linear-gradient(180deg, rgba(240, 234, 255, .95), rgba(200, 180, 240, .9)) !important;
+  box-shadow: 0 6px 20px rgba(167, 120, 231, .2) !important;
+  font-size: 15px !important;
+  font-weight: 650 !important;
+}
+.timer-primary--stop {
+  color: #ffd0d0 !important;
+  background: rgba(140, 40, 60, .7) !important;
+  box-shadow: none !important;
+}
+
+/* Block toggle pill — minimal */
+.timer-block-pill {
+  border-color: rgba(167, 120, 231, .12) !important;
+  background: rgba(167, 120, 231, .05) !important;
+}
+.timer-block-pill.is-active {
+  border-color: rgba(167, 120, 231, .3) !important;
+  background: rgba(167, 120, 231, .12) !important;
+}
+
+/* Preset cards — dark, clean */
+.timer-preset-card {
+  border-color: rgba(167, 120, 231, .1) !important;
+  border-radius: 20px !important;
+  background: #0c0a14 !important;
+}
+.timer-preset-card.is-selected {
+  border-color: rgba(167, 120, 231, .4) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════
+   TIMER — definitive Amethyst styling
+   Pure black bg, white text, #BCBBC0 secondary, #3A3A3A surfaces
+   ══════════════════════════════════════════════════════ */
+.timer-screen--live {
+  background: #000 !important;
+}
+.timer-screen--live::before,
+.timer-screen--live::after {
+  display: none !important;
+}
+.timer-header {
+  position: relative !important;
+  z-index: 4 !important;
+}
+.timer-header h1 {
+  color: #fff !important;
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+}
+.timer-header__status {
+  border-color: rgba(255,255,255,.08) !important;
+  background: rgba(255,255,255,.05) !important;
+  color: #bcbbc0 !important;
+}
+
+/* Cave — clean, no chrome */
+
+/* Ring */
+
+/* Countdown */
+.timer-lcd.is-running span {
+  animation: none !important;
+}
+
+/* Label */
+
+/* Duration stepper */
+.timer-duration {
+  margin-top: 8px !important;
+}
+.timer-duration button {
+  border-color: rgba(255,255,255,.08) !important;
+  background: rgba(255,255,255,.05) !important;
+  color: #fff !important;
+}
+.timer-duration > div {
+  border-color: rgba(255,255,255,.08) !important;
+  background: rgba(255,255,255,.03) !important;
+}
+.timer-duration strong {
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
+/* Start button — high-contrast white pill. */
+.timer-primary {
+  height: 52px !important;
+  margin: 16px 0 12px !important;
+  border: none !important;
+  border-radius: 999px !important;
+  color: #000 !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+.timer-primary span {
+  color: #000 !important;
+}
+.timer-primary--stop {
+  color: #fff !important;
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+}
+
+/* Block toggle */
+.timer-block-pill {
+  border-color: rgba(255,255,255,.08) !important;
+  background: rgba(255,255,255,.03) !important;
+  color: #bcbbc0 !important;
+}
+.timer-block-pill b {
+  color: #fff !important;
+}
+.timer-block-pill strong {
+  color: #555 !important;
+}
+.timer-block-pill.is-active {
+  border-color: rgba(179,154,255,.3) !important;
+  background: rgba(179,154,255,.08) !important;
+}
+.timer-block-pill.is-active strong {
+  color: #b39aff !important;
+}
+
+/* Preset section */
+.timer-collections__heading h2 {
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
+/* Preset cards — dark surface with image */
+.timer-preset-card {
+  border-color: rgba(255,255,255,.06) !important;
+  border-radius: 20px !important;
+  background: #0a0a0a !important;
+}
+.timer-preset-card.is-selected {
+  border-color: rgba(255,255,255,.2) !important;
+}
+.timer-preset-card__minutes {
+  border-color: rgba(255,255,255,.15) !important;
+  background: rgba(0,0,0,.4) !important;
+  color: #fff !important;
+}
+.timer-preset-card strong {
+  color: #fff !important;
+}
+.timer-preset-card small {
+  color: #bcbbc0 !important;
+}
+
+/* Glow icon utility — remove purple glow, use subtle white */
+.amethyst-glow-icon {
+  filter: none !important;
+}
+
+/* ── Item 12: Hold-to-end session progress bar ── */
+.timer-primary--stop {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate;
+  touch-action: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.timer-primary--stop::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--end-progress, 0%);
+  background: rgba(255, 120, 140, .25);
+  border-radius: inherit;
+  transition: width 80ms linear;
+  z-index: 0;
+}
+.timer-primary--stop.is-holding {
+  border-color: rgba(255, 140, 160, .4) !important;
+  background: rgba(160, 45, 70, .85) !important;
+}
+.timer-primary--stop.is-holding::before {
+  background: rgba(255, 180, 190, .2);
+}
+
+/* ── Item 13: Block toggle subtitle ── */
+.timer-block-pill {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 6px !important;
+  min-height: 44px !important;
+  padding: 6px 14px !important;
+  grid-template-columns: unset !important;
+}
+.timer-block-pill__text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.timer-block-pill__subtitle {
+  display: block;
+  width: 100%;
+  margin-top: -2px;
+  color: #555 !important;
+  font-size: 10px !important;
+  font-weight: 500;
+  letter-spacing: .02em;
+}
+
+/* ── Item 14: Settings icon — Lucide gear matching ProfileScreen ── */
+.timer-header__status {
+  display: grid !important;
+  place-items: center !important;
+}
+.timer-header__status svg {
+  width: 20px;
+  height: 20px;
+}
+.timer-header__status span {
+  display: none;
+}
+
+/* Block toggle — centre it */
+.timer-block-pill {
+  margin: 0 auto !important;
+  display: flex !important;
+  width: fit-content !important;
+}
+.timer-block-pill__subtitle {
+  display: block !important;
+  text-align: center !important;
+  width: 100% !important;
+}

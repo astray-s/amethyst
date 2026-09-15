@@ -1,0 +1,104 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
+
+def releaseStoreFile = System.getenv('AMETHYST_RELEASE_STORE_FILE')
+def releaseStorePassword = System.getenv('AMETHYST_RELEASE_STORE_PASSWORD')
+def releaseKeyAlias = System.getenv('AMETHYST_RELEASE_KEY_ALIAS')
+def releaseKeyPassword = System.getenv('AMETHYST_RELEASE_KEY_PASSWORD')
+def hasPrivateReleaseSigning = [
+    releaseStoreFile,
+    releaseStorePassword,
+    releaseKeyAlias,
+    releaseKeyPassword,
+].every { value -> value != null && !value.isBlank() }
+if (hasPrivateReleaseSigning && !file(releaseStoreFile).isFile()) {
+    throw new GradleException('AMETHYST_RELEASE_STORE_FILE does not point to a readable file.')
+}
+
+android {
+    namespace = "io.github.astrays.amethyst"
+    compileSdk = rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "io.github.astrays.amethyst"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 100
+        versionName "0.1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        aaptOptions {
+             // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
+             // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
+            ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+        }
+    }
+    signingConfigs {
+        if (hasPrivateReleaseSigning) {
+            privateRelease {
+                storeFile file(releaseStoreFile)
+                storePassword releaseStorePassword
+                keyAlias releaseKeyAlias
+                keyPassword releaseKeyPassword
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (hasPrivateReleaseSigning) {
+                signingConfig signingConfigs.privateRelease
+            }
+        }
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+}
+
+gradle.taskGraph.whenReady { taskGraph ->
+    boolean releaseTaskRequested = taskGraph.allTasks.any {
+        it.project == project && it.name.toLowerCase(Locale.ROOT).contains('release')
+    }
+    if (releaseTaskRequested && !hasPrivateReleaseSigning) {
+        throw new GradleException(
+            'Release signing is required. Set all four AMETHYST_RELEASE_* variables; '
+                + 'debug-key fallback is intentionally disabled.'
+        )
+    }
+}
+
+repositories {
+    flatDir{
+        dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
+    implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
+    implementation project(':capacitor-android')
+    testImplementation "junit:junit:$junitVersion"
+    // The android.jar on the unit-test classpath only ships stubs that throw, so
+    // FocusEngine's rule logic (org.json, TextUtils, SharedPreferences, AlarmManager)
+    // is untestable off-device without real framework implementations.
+    testImplementation "org.json:json:20250107"
+    testImplementation "org.robolectric:robolectric:4.15.1"
+    androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
+    implementation project(':capacitor-cordova-android-plugins')
+}
+
+apply from: 'capacitor.build.gradle'
+
+try {
+    def servicesJSON = file('google-services.json')
+    if (servicesJSON.text) {
+        apply plugin: 'com.google.gms.google-services'
+    }
+} catch(Exception e) {
+    logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+}

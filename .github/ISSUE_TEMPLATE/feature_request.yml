@@ -1,0 +1,41 @@
+name: Feature request
+description: Propose a focused improvement to Amethyst
+title: "[Feature]: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Describe the situation before describing a solution.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed experience
+      description: Explain how the feature should behave from the user's point of view.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Share any simpler approach or existing workflow you considered.
+  - type: checkboxes
+    id: impact
+    attributes:
+      label: Sensitive capability check
+      options:
+        - label: This may involve app usage, Accessibility Services, installed-app visibility, notifications, scoring, storage, networking, or background work.
+  - type: textarea
+    id: privacy
+    attributes:
+      label: Privacy and permission impact
+      description: If the sensitive capability box is checked, explain what data or permission is needed and why.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues and discussions.
+          required: true

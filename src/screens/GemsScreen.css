@@ -1,0 +1,763 @@
+.gems-screen {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 480px);
+  min-height: 100dvh;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: max(18px, env(safe-area-inset-top)) 18px 56px;
+  color: #fff;
+  background:
+    radial-gradient(ellipse at 50% 4%, rgba(105, 68, 173, .19), transparent 28rem),
+    radial-gradient(ellipse at 84% 26%, rgba(54, 96, 153, .09), transparent 22rem),
+    #020204;
+}
+
+.gems-screen::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  opacity: .48;
+  background-image:
+    radial-gradient(circle, rgba(220, 208, 255, .34) 0 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(123, 172, 231, .22) 0 1px, transparent 1.5px);
+  background-position: 10px 14px, 43px 56px;
+  background-size: 79px 97px, 113px 137px;
+  mask-image: linear-gradient(to bottom, #000, transparent 47%);
+  animation: gems-star-drift 24s linear infinite;
+}
+
+.gems-header {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 42px 1fr 42px;
+  min-height: 48px;
+  align-items: center;
+  gap: 10px;
+}
+
+.gems-header button,
+.gems-header > span {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid rgba(211, 197, 246, .16);
+  border-radius: 50%;
+  background: rgba(22, 20, 29, .72);
+}
+
+.gems-header button {
+  color: #f5efff;
+  font-size: 29px;
+  font-weight: 250;
+}
+
+.gems-header div {
+  text-align: center;
+}
+
+.gems-header h1 {
+  margin: 0;
+  font-size: 27px;
+  font-weight: 640;
+  letter-spacing: -1.2px;
+}
+
+.gems-header p {
+  margin: 2px 0 0;
+  color: #8f8a98;
+  font-size: 10px;
+}
+
+.gems-header > span {
+  color: #c9bcf0;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.gems-vault {
+  position: relative;
+  display: grid;
+  min-height: 304px;
+  margin: 4px -18px 0;
+  place-items: center;
+  overflow: hidden;
+}
+
+.gems-vault::before,
+.gems-vault::after {
+  position: absolute;
+  content: "";
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.gems-vault::before {
+  width: 276px;
+  height: 276px;
+  border: 1px solid rgba(196, 177, 239, .08);
+  box-shadow:
+    inset 0 0 70px rgba(104, 72, 165, .06),
+    0 0 80px rgba(58, 62, 123, .08);
+}
+
+.gems-vault::after {
+  width: 190px;
+  height: 190px;
+  border: 1px solid rgba(192, 172, 241, .12);
+}
+
+.gems-vault__stars {
+  position: absolute;
+  inset: 18px 10%;
+  background:
+    radial-gradient(circle at 12% 22%, #b8a6e7 0 1px, transparent 2px),
+    radial-gradient(circle at 86% 19%, #8db8e0 0 1px, transparent 2px),
+    radial-gradient(circle at 22% 78%, #ad8ce0 0 1px, transparent 2px),
+    radial-gradient(circle at 78% 82%, #b8a6e7 0 1px, transparent 2px);
+}
+
+.gems-vault__featured {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  width: 220px;
+  min-height: 260px;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.gems-vault__featured img {
+  position: relative;
+  z-index: 2;
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  filter:
+    saturate(1.08)
+    brightness(1.04)
+    drop-shadow(0 18px 21px rgba(0, 0, 0, .66))
+    drop-shadow(0 0 20px rgba(167, 94, 255, .34))
+    drop-shadow(0 0 42px rgba(79, 140, 224, .18));
+  animation: gems-featured-float 6.4s ease-in-out infinite;
+}
+
+.gems-vault__glow {
+  position: absolute;
+  top: 39px;
+  width: 152px;
+  height: 130px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(164, 94, 245, .38), rgba(62, 112, 194, .17) 48%, transparent 72%);
+  filter: blur(20px);
+  animation: gems-glow-breathe 5.8s ease-in-out infinite;
+}
+
+.gems-vault__featured small {
+  margin-top: -5px;
+  color: #9b94a7;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.gems-vault__featured strong {
+  margin-top: 4px;
+  font-size: 17px;
+  font-weight: 620;
+  letter-spacing: -.4px;
+}
+
+.gems-vault__orbit {
+  position: absolute;
+  z-index: 1;
+  display: grid;
+  width: 50px;
+  height: 50px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--orbit-color) 38%, transparent);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--orbit-color) 10%, rgba(8, 7, 13, .76));
+  box-shadow: 0 0 22px color-mix(in srgb, var(--orbit-color) 17%, transparent);
+  animation: gems-orbit-float 7s ease-in-out infinite;
+}
+
+.gems-vault__orbit img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  opacity: .56;
+  filter: saturate(.8);
+}
+
+.gems-vault__orbit--1 { top: 48px; left: 14%; animation-delay: -1.2s; }
+.gems-vault__orbit--2 { top: 58px; right: 12%; width: 36px; height: 36px; animation-delay: -3.7s; }
+.gems-vault__orbit--3 { bottom: 47px; left: 9%; width: 32px; height: 32px; animation-delay: -2.4s; }
+.gems-vault__orbit--4 { right: 8%; bottom: 61px; width: 46px; height: 46px; animation-delay: -.4s; }
+.gems-vault__orbit--5 { top: 23px; left: 47%; width: 25px; height: 25px; animation-delay: -4.8s; }
+
+.gem-streak {
+  display: grid;
+  min-height: 104px;
+  padding: 17px 18px;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 24px;
+  border: 1px solid rgba(207, 190, 247, .11);
+  border-radius: 23px;
+  background:
+    radial-gradient(circle at 7% 0, rgba(111, 70, 179, .18), transparent 42%),
+    rgba(16, 15, 22, .88);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, .04),
+    0 18px 38px rgba(42, 26, 74, .14);
+}
+
+.gem-streak > div:first-child > span {
+  display: block;
+  color: #9c96a7;
+  font-size: 8px;
+  font-weight: 750;
+  letter-spacing: .13em;
+}
+
+.gem-streak strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 34px;
+  font-weight: 610;
+  letter-spacing: -1.7px;
+}
+
+.gem-streak strong i {
+  color: #918b99;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.gem-streak__next {
+  min-width: 0;
+}
+
+.gem-streak__next small {
+  display: block;
+  overflow: hidden;
+  color: #bbb4c6;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gem-streak__next > span {
+  display: block;
+  height: 4px;
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #25222c;
+}
+
+.gem-streak__next i {
+  display: block;
+  width: var(--streak-progress);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #9f6ae5, #94a7ff 56%, #74c8ef);
+  box-shadow: 0 0 12px rgba(137, 113, 235, .32);
+}
+
+.gems-section {
+  margin-top: 34px;
+}
+
+.gems-section > header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.gems-section > header small {
+  color: #746f7d;
+  font-size: 8px;
+  font-weight: 750;
+  letter-spacing: .13em;
+}
+
+.gems-section > header h2 {
+  margin: 3px 0 0;
+  font-size: 22px;
+  font-weight: 620;
+  letter-spacing: -.8px;
+}
+
+.gems-section > header > span {
+  color: #918a9e;
+  font-size: 9px;
+}
+
+.gems-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.gem-card {
+  min-width: 0;
+}
+
+.gem-card__art {
+  position: relative;
+  display: grid;
+  min-height: 176px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--gem-primary) 25%, rgba(255, 255, 255, .08));
+  border-radius: 25px;
+  background:
+    radial-gradient(circle at 52% 48%, color-mix(in srgb, var(--gem-primary) 23%, transparent), transparent 45%),
+    linear-gradient(145deg, color-mix(in srgb, var(--gem-secondary) 11%, #17131e), #0c0c11 68%);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, .05),
+    0 15px 32px rgba(0, 0, 0, .22);
+}
+
+.gem-card__art::before {
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(255, 255, 255, .045);
+  border-radius: 19px;
+  content: "";
+}
+
+.gem-card__aura {
+  position: absolute;
+  width: 105px;
+  height: 92px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--gem-primary) 40%, transparent), transparent 70%);
+  filter: blur(16px);
+}
+
+.gem-card__art img {
+  position: relative;
+  z-index: 1;
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  opacity: .3;
+  transform: rotate(calc((var(--gem-index) - 4) * 2.5deg)) scale(.94);
+  filter:
+    hue-rotate(calc(var(--gem-index) * 12deg))
+    saturate(.72)
+    brightness(.64)
+    drop-shadow(0 10px 14px rgba(0, 0, 0, .52));
+}
+
+.gem-card.is-unlocked .gem-card__art {
+  border-color: color-mix(in srgb, var(--gem-primary) 47%, #d7cdef);
+  background:
+    radial-gradient(circle at 50% 44%, color-mix(in srgb, var(--gem-primary) 38%, transparent), transparent 48%),
+    linear-gradient(145deg, color-mix(in srgb, var(--gem-secondary) 18%, #1b1625), #0d0c12 72%);
+}
+
+.gem-card.is-unlocked .gem-card__art img {
+  opacity: 1;
+  filter:
+    hue-rotate(calc(var(--gem-index) * 12deg))
+    saturate(1.06)
+    brightness(1.03)
+    drop-shadow(0 12px 15px rgba(0, 0, 0, .58))
+    drop-shadow(0 0 15px color-mix(in srgb, var(--gem-primary) 31%, transparent));
+  animation: gem-card-float 5.8s ease-in-out calc(var(--gem-index) * -240ms) infinite;
+}
+
+.gem-card__locked {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 25px;
+  color: color-mix(in srgb, var(--gem-secondary) 62%, #d6d0e6);
+  background: rgba(8, 7, 11, .55);
+  box-shadow: none;
+  font-size: 40px;
+}
+
+.gem-card__copy {
+  padding: 10px 4px 7px;
+}
+
+.gem-card__copy strong,
+.gem-card__copy small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gem-card__copy strong {
+  font-size: 12px;
+  font-weight: 620;
+}
+
+.gem-card__copy small {
+  margin-top: 4px;
+  color: #8f8997;
+  font-size: 9px;
+}
+
+@keyframes gems-featured-float {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-7px) rotate(1deg); }
+}
+
+@keyframes gems-glow-breathe {
+  0%, 100% { opacity: .72; transform: scale(.94); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+@keyframes gems-orbit-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+@keyframes gem-card-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -4px; }
+}
+
+@keyframes gems-star-drift {
+  to { background-position: 89px 111px, 156px 193px; }
+}
+
+@media (max-width: 360px) {
+  .gems-vault { min-height: 284px; }
+  .gems-vault__featured img { width: 180px; height: 180px; }
+  .gem-card__art { min-height: 160px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gems-screen::before,
+  .gems-vault__featured img,
+  .gems-vault__glow,
+  .gems-vault__orbit,
+  .gem-card.is-unlocked .gem-card__art img {
+    animation: none;
+  }
+}
+
+/* ── Gem cards stagger in on page load ── */
+.gem-card {
+  animation: gem-card-enter 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.gem-card:nth-child(1) { animation-delay: 80ms; }
+.gem-card:nth-child(2) { animation-delay: 140ms; }
+.gem-card:nth-child(3) { animation-delay: 200ms; }
+.gem-card:nth-child(4) { animation-delay: 260ms; }
+.gem-card:nth-child(5) { animation-delay: 320ms; }
+.gem-card:nth-child(6) { animation-delay: 380ms; }
+.gem-card:nth-child(7) { animation-delay: 440ms; }
+.gem-card:nth-child(8) { animation-delay: 500ms; }
+
+@keyframes gem-card-enter {
+  from { transform: translateY(20px) scale(0.85); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Unlocked gems have a continuous subtle float */
+.gem-card.is-unlocked .gem-card__art img {
+  animation: gem-float 4s ease-in-out infinite;
+}
+@keyframes gem-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Unlocked gem aura pulses */
+.gem-card.is-unlocked .gem-card__aura {
+  animation: gem-aura-pulse 3s ease-in-out infinite !important;
+}
+@keyframes gem-aura-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.15); opacity: 0.8; }
+}
+
+/* Locked gems have a subtle shimmer tease */
+.gem-card:not(.is-unlocked) .gem-card__locked {
+  animation: gem-locked-shimmer 3s ease-in-out infinite;
+}
+@keyframes gem-locked-shimmer {
+  0%, 100% { opacity: 0.4; transform: scale(1) rotate(0deg); }
+  50% { opacity: 0.7; transform: scale(1.1) rotate(15deg); }
+}
+
+/* Tap feedback on gem cards */
+.gem-card:active {
+  transform: scale(0.94) !important;
+  transition: transform 0.1s;
+}
+
+/* Featured gem hero entrance */
+.gem-featured {
+  animation: gem-hero-entrance 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 200ms;
+}
+@keyframes gem-hero-entrance {
+  from { transform: scale(0.8); opacity: 0; filter: blur(8px); }
+  to { transform: scale(1); opacity: 1; filter: blur(0); }
+}
+
+/* Streak counter bounce when visible */
+.gem-streak strong {
+  animation: gem-streak-bounce 600ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: 400ms;
+}
+@keyframes gem-streak-bounce {
+  from { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.1); }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Progress bar fill animation */
+.gem-progress__fill {
+  animation: gem-progress-fill 1200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 500ms;
+}
+@keyframes gem-progress-fill {
+  from { transform: scaleX(0); transform-origin: left; }
+  to { transform: scaleX(1); transform-origin: left; }
+}
+
+/* Section headers slide in */
+.gems-section header {
+  animation: gem-section-slide 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.gems-section:nth-of-type(1) header { animation-delay: 300ms; }
+.gems-section:nth-of-type(2) header { animation-delay: 500ms; }
+
+@keyframes gem-section-slide {
+  from { transform: translateX(-12px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+
+/* ── Gems screen amethyst palette alignment ── */
+.gems-screen {
+  background:
+    radial-gradient(ellipse at 50% 5%, rgba(107, 79, 168, .18), transparent 22rem),
+    #000 !important;
+}
+.gems-vault {
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(107, 79, 168, .15), transparent 60%),
+    rgba(8, 6, 14, .95) !important;
+}
+.gem-card {
+  border-color: rgba(167, 120, 231, .12) !important;
+  background: linear-gradient(155deg, rgba(30, 26, 46, .9), rgba(12, 10, 20, .95)) !important;
+}
+.gem-card.is-unlocked {
+  border-color: rgba(167, 120, 231, .35) !important;
+  box-shadow: 0 4px 20px rgba(167, 120, 231, .1) !important;
+}
+.gem-card__locked {
+  font-size: 16px !important;
+  filter: none !important;
+}
+.gem-card__art img {
+  filter: saturate(.7) brightness(.6) !important;
+}
+.gem-card.is-unlocked .gem-card__art img {
+  filter: saturate(1.1) brightness(.95) !important;
+}
+.gem-streak {
+  border-color: rgba(167, 120, 231, .15) !important;
+  background: rgba(20, 16, 32, .8) !important;
+}
+.gem-streak__next span {
+  background: rgba(167, 120, 231, .15) !important;
+}
+.gem-streak__next span i {
+  background: var(--amethyst-accent, #a778e7) !important;
+}
+
+
+/* ══ Gems — definitive Amethyst styling ══ */
+.gems-screen {
+  background: #000 !important;
+}
+.gems-header h1 {
+  color: #fff !important;
+}
+.gems-header p {
+  color: #bcbbc0 !important;
+}
+.gems-header > span {
+  color: #555 !important;
+}
+.gems-header button {
+  color: #bcbbc0 !important;
+  border-color: rgba(255,255,255,.08) !important;
+  background: rgba(255,255,255,.05) !important;
+}
+.gems-vault {
+  background: #000 !important;
+  border-color: rgba(255,255,255,.04) !important;
+}
+.gems-vault__featured strong {
+  color: #fff !important;
+}
+.gems-vault__featured small {
+  color: #555 !important;
+}
+.gem-streak {
+  border-color: rgba(255,255,255,.06) !important;
+  background: rgba(255,255,255,.02) !important;
+}
+.gem-streak > div:first-child > span {
+  color: #555 !important;
+}
+.gem-streak > div:first-child strong {
+  color: #fff !important;
+}
+.gem-streak > div:first-child i {
+  color: #bcbbc0 !important;
+}
+.gem-streak__next small {
+  color: #bcbbc0 !important;
+}
+.gem-streak__next span {
+  background: rgba(255,255,255,.06) !important;
+}
+.gem-streak__next span i {
+  background: #b39aff !important;
+}
+.gems-section header span {
+  color: #555 !important;
+}
+.gems-section header small {
+  color: #555 !important;
+}
+.gems-section header h2 {
+  color: #fff !important;
+}
+.gem-card {
+  border-color: rgba(255,255,255,.06) !important;
+  background: #0a0a0a !important;
+}
+.gem-card.is-unlocked {
+  border-color: rgba(255,255,255,.12) !important;
+}
+.gem-card__copy strong {
+  color: #fff !important;
+}
+.gem-card__copy small {
+  color: #bcbbc0 !important;
+}
+
+/* ── FIX 7: Gem counter progress pill ── */
+.gems-header__counter {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: auto !important;
+  height: auto !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.gems-header__counter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(179, 154, 255, 0.12);
+  color: #d4c8ea;
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.gems-header__counter-bar {
+  display: block;
+  width: 36px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.gems-header__counter-bar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #b39aff;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── FIX 8: Streak card energised ── */
+.gem-streak--energised {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 16px !important;
+  padding: 20px 18px !important;
+  border: 1px solid rgba(168, 85, 247, 0.3) !important;
+  background:
+    linear-gradient(155deg, rgba(38, 20, 58, 0.9), rgba(10, 8, 16, 0.95)) !important;
+}
+
+.gem-streak__hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.gem-streak__flame {
+  font-size: 32px;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(255, 120, 0, 0.4));
+}
+
+.gem-streak__number {
+  display: block !important;
+  margin: 0 !important;
+  font-size: 52px !important;
+  font-weight: 700 !important;
+  letter-spacing: -2.5px !important;
+  color: #fff !important;
+  line-height: 1 !important;
+}
+
+.gem-streak__label {
+  display: block;
+  margin-top: 2px;
+  color: #8f8a98;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.gem-streak--energised .gem-streak__next {
+  grid-column: auto;
+  min-width: auto;
+}

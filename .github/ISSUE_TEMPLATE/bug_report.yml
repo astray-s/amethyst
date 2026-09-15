@@ -1,0 +1,62 @@
+name: Bug report
+description: Report reproducible behavior that is not working as intended
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Amethyst. Do not include private usage data, health data, credentials, or security vulnerabilities here. Report security issues through SECURITY.md.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Describe the result you saw and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open...
+        2. Tap...
+        3. Observe...
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Where did this happen?
+      options:
+        - Android app
+        - Browser development build
+        - Build or CI
+        - Documentation
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Commit or version
+      description: Paste the commit SHA, tag, or build identifier if known.
+  - type: input
+    id: environment
+    attributes:
+      label: Device and environment
+      description: Include Android version, device model, browser, Node version, or JDK version as relevant.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Remove personal data before attaching logs or images.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues.
+          required: true
+        - label: I removed personal and sensitive information.
+          required: true
+        - label: This is not a security vulnerability.
+          required: true

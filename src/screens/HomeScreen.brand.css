@@ -1,0 +1,915 @@
+/* Canonical homepage implementation for the locked Amethyst brand system. */
+
+.home-rebuild {
+  --home-bg: #050506;
+  --home-surface: #0d0d10;
+  --home-surface-deep: #08080a;
+  --home-border: rgba(229, 221, 240, 0.09);
+  --home-text: #f7f5f9;
+  --home-muted: #aaa6b0;
+  --home-dim: #77737d;
+  --home-violet: #c6a5f7;
+  --home-violet-strong: #a976e8;
+  --home-ice: #b8cffa;
+  --home-stone-lift: 70px;
+  --home-score-glow: linear-gradient(105deg, #f5eaff 0%, #cfacff 52%, #c09cec 100%);
+  --home-icon-glow:
+    drop-shadow(0 0 3px rgba(255, 248, 255, 0.82))
+    drop-shadow(0 0 9px rgba(207, 172, 255, 0.68))
+    drop-shadow(0 0 15px rgba(192, 156, 236, 0.34));
+
+  width: min(100%, 480px);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding-bottom: 118px;
+  color: var(--home-text);
+  background: var(--home-bg);
+}
+
+.home-rebuild button {
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.home-rebuild[data-score-phase="loading"] .home-cave > *:not(.home-live__header) {
+  opacity: 0;
+}
+
+.home-rebuild[data-score-phase="calculating"] .home-stone,
+.home-rebuild[data-score-phase="calculating"] .home-score {
+  animation: home-rebuild-arrive 480ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.home-rebuild[data-score-phase="resolved"] .home-score-pills button {
+  animation: home-rebuild-pill 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.home-rebuild[data-score-phase="resolved"] .home-score-pills button:nth-child(2) {
+  animation-delay: 70ms;
+}
+
+.home-rebuild[data-score-phase="resolved"] .home-score-pills button:nth-child(3) {
+  animation-delay: 140ms;
+}
+
+.home-rebuild .home-cave {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: clamp(520px, 64svh, 550px);
+  overflow: hidden;
+  padding: max(16px, env(safe-area-inset-top)) 17px 18px;
+  isolation: isolate;
+  background: var(--home-bg);
+}
+
+.home-rebuild .home-cave::before,
+.home-rebuild .home-cave::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+}
+
+.home-rebuild .home-cave::before {
+  z-index: 0;
+  inset: 0 0 auto;
+  height: 470px;
+  opacity: 0.84;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.32), transparent 20% 80%, rgba(0, 0, 0, 0.36)),
+    url("/assets/amethyst-cave-backdrop.jpg") center top / cover no-repeat;
+  filter: saturate(0.72) contrast(1.04);
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #000 0 50%,
+    rgba(0, 0, 0, 0.86) 64%,
+    rgba(0, 0, 0, 0.34) 80%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    #000 0 50%,
+    rgba(0, 0, 0, 0.86) 64%,
+    rgba(0, 0, 0, 0.34) 80%,
+    transparent 100%
+  );
+}
+
+.home-rebuild .home-cave::after {
+  z-index: 1;
+  inset: 145px 0 0;
+  background:
+    radial-gradient(ellipse at 50% 14%, rgba(161, 113, 221, 0.08), transparent 30%),
+    linear-gradient(
+      180deg,
+      rgba(5, 5, 6, 0) 0,
+      rgba(5, 5, 6, 0.28) 22%,
+      rgba(5, 5, 6, 0.82) 51%,
+      var(--home-bg) 70%
+    );
+}
+
+.home-rebuild .home-live__header,
+.home-rebuild .home-stone,
+.home-rebuild .home-score,
+.home-rebuild .home-score-pills {
+  position: relative;
+}
+
+.home-rebuild .home-live__header {
+  z-index: 5;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home-rebuild .home-live__brand {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 23px;
+  font-weight: 570;
+  letter-spacing: -1.1px;
+}
+
+.home-rebuild .home-live__actions {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.home-rebuild .home-live__actions button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  border: 0;
+  color: #ddd3ed;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 680;
+}
+
+.home-rebuild .home-live__flame {
+  color: transparent;
+  background: var(--home-score-glow);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 19px;
+  filter: var(--home-icon-glow);
+}
+
+.home-rebuild .home-live__profile {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(197, 207, 232, 0.66);
+  border-radius: 14px;
+  color: #d4daf0;
+  background: rgba(8, 8, 10, 0.5);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.06);
+  transform: rotate(-9deg);
+}
+
+.home-rebuild .home-live__profile svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  transform: rotate(9deg);
+}
+
+.home-rebuild .home-cave__stars,
+.home-rebuild .home-stone__plinth,
+.home-rebuild .home-stone::after {
+  display: none;
+}
+
+.home-rebuild .home-stone {
+  z-index: 4;
+  display: grid;
+  width: 100%;
+  height: clamp(248px, 31svh, 286px);
+  margin-top: 2px;
+  padding: 0 0 clamp(56px, 8svh, 72px);
+  place-items: end center;
+  border: 0;
+  background: transparent;
+}
+
+.home-rebuild .home-stone__glow {
+  position: absolute;
+  z-index: 1;
+  bottom: calc(clamp(35px, 5svh, 46px) + var(--home-stone-lift));
+  left: 50%;
+  width: min(70vw, 286px);
+  height: min(58vw, 232px);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    rgba(255, 245, 255, 0.38),
+    rgba(207, 172, 255, 0.3) 35%,
+    rgba(192, 156, 236, 0.12) 57%,
+    transparent 73%
+  );
+  filter: blur(22px);
+  transform: translateX(-50%);
+  animation: home-rebuild-glow 6.4s ease-in-out infinite;
+}
+
+.home-rebuild .home-stone img {
+  position: relative;
+  top: calc(-1 * var(--home-stone-lift));
+  z-index: 2;
+  display: block;
+  width: clamp(340px, 88vw, 360px);
+  height: auto;
+  margin-bottom: -20px;
+  margin-left: -4px;
+  object-fit: contain;
+  filter:
+    saturate(1.02)
+    drop-shadow(0 13px 17px rgba(0, 0, 0, 0.72))
+    drop-shadow(0 0 7px rgba(255, 247, 255, 0.48))
+    drop-shadow(0 0 18px rgba(207, 172, 255, 0.42))
+    drop-shadow(0 0 27px rgba(192, 156, 236, 0.2));
+  animation: home-rebuild-float 7.4s ease-in-out infinite;
+}
+
+.home-rebuild .home-score {
+  z-index: 4;
+  display: flex;
+  width: 100%;
+  margin-top: -30px;
+  padding: 0;
+  flex-direction: column;
+  align-items: center;
+  border: 0;
+  color: var(--home-ice);
+  background: transparent;
+}
+
+.home-rebuild .home-score > span:first-child {
+  color: transparent;
+  background: var(--home-score-glow);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 12px;
+  font-weight: 690;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  filter: drop-shadow(0 0 7px rgba(186, 126, 243, 0.5));
+}
+
+.home-rebuild .home-score strong {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: transparent;
+  background: var(--home-score-glow);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: clamp(45px, 12vw, 51px);
+  font-weight: 650;
+  letter-spacing: -3px;
+  line-height: 0.92;
+  filter:
+    drop-shadow(0 0 5px rgba(241, 216, 255, 0.48))
+    drop-shadow(0 0 15px rgba(170, 103, 239, 0.46))
+    drop-shadow(0 0 24px rgba(224, 191, 255, 0.2));
+}
+
+.home-rebuild .home-score strong svg {
+  width: 16px;
+  height: 16px;
+  fill: #c9b2ec;
+  stroke: none;
+  filter: var(--home-icon-glow);
+  transform: rotate(180deg);
+}
+
+.home-rebuild .home-score__branches {
+  position: relative;
+  width: 1px;
+  height: 39px;
+  margin-top: 10px;
+  background: rgba(222, 216, 231, 0.17);
+}
+
+.home-rebuild .home-score__branches::before {
+  position: absolute;
+  top: 21px;
+  left: 50%;
+  width: min(64vw, 238px);
+  height: 23px;
+  border: 1px solid rgba(222, 216, 231, 0.17);
+  border-bottom: 0;
+  border-radius: 22px 22px 0 0;
+  content: "";
+  transform: translateX(-50%);
+}
+
+.home-rebuild .home-score-pills {
+  z-index: 4;
+  display: grid;
+  width: min(100%, 336px);
+  margin: 7px auto 0;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.home-rebuild .home-score-pills button {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 64px;
+  padding: 0;
+  grid-template-columns: 22px minmax(26px, auto);
+  grid-template-rows: 37px 20px;
+  align-items: center;
+  justify-content: center;
+  column-gap: 6px;
+  border: 0;
+  color: #d8c6ef;
+  background: transparent;
+}
+
+.home-rebuild .home-score-pills button::before {
+  position: absolute;
+  inset: 0 0 24px;
+  padding: 1.5px;
+  border-radius: 999px;
+  content: "";
+  background: var(--home-score-glow);
+  box-shadow:
+    0 0 7px rgba(232, 204, 255, 0.24),
+    0 0 15px rgba(157, 93, 226, 0.22),
+    0 0 23px rgba(224, 191, 255, 0.12);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.home-rebuild .home-score-pills button > span {
+  z-index: 1;
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  color: #dabaff;
+  filter: var(--home-icon-glow);
+}
+
+.home-rebuild .home-score-pills button > span svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.home-rebuild .home-score-pills button strong {
+  z-index: 1;
+  color: transparent;
+  background: var(--home-score-glow);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 19px;
+  font-weight: 520;
+  line-height: 1;
+  filter:
+    drop-shadow(0 0 4px rgba(238, 213, 255, 0.58))
+    drop-shadow(0 0 10px rgba(172, 106, 237, 0.5));
+}
+
+.home-rebuild .home-score-pills button small {
+  grid-column: 1 / -1;
+  margin-top: 5px;
+  color: transparent;
+  background: var(--home-score-glow);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  filter: drop-shadow(0 0 6px rgba(178, 116, 236, 0.45));
+}
+
+.home-rebuild .home-panel {
+  position: relative;
+  overflow: hidden;
+  margin: 16px 16px 0;
+  border: 1px solid var(--home-border);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 12% 0, rgba(164, 119, 218, 0.07), transparent 42%),
+    linear-gradient(145deg, var(--home-surface), var(--home-surface-deep));
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.035),
+    0 14px 34px rgba(0, 0, 0, 0.28);
+}
+
+.home-rebuild .home-usage {
+  padding: 19px 19px 15px;
+}
+
+.home-rebuild .home-usage header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.home-rebuild .home-usage header span {
+  grid-column: 1 / -1;
+  color: var(--home-muted);
+  font-size: 16px;
+}
+
+.home-rebuild .home-usage header strong {
+  color: var(--home-text);
+  font-size: 37px;
+  font-weight: 520;
+  letter-spacing: -2.4px;
+  line-height: 1;
+}
+
+.home-rebuild .home-usage header small {
+  color: var(--home-muted);
+  font-size: 14px;
+}
+
+.home-rebuild .home-usage__apps {
+  padding-top: 10px;
+}
+
+.home-rebuild .home-usage__empty {
+  margin: 14px 0 1px;
+  color: rgba(245, 242, 248, 0.58);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.home-rebuild .home-usage__row {
+  display: grid;
+  grid-template-columns: 42px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.home-rebuild .home-usage__row > .amethyst-app-glyph {
+  width: 38px;
+  height: 38px;
+  padding: 9px;
+  border-radius: 12px;
+}
+
+.home-rebuild .home-usage__row > div strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 550;
+}
+
+.home-rebuild .home-usage__row > div span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  margin-top: 7px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.home-rebuild .home-usage__row > div i {
+  display: block;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--home-violet-strong), var(--home-ice));
+}
+
+.home-rebuild .home-usage__row > small {
+  color: #cfc0e1;
+  font-size: 13px;
+}
+
+.home-rebuild .home-first-step {
+  display: flex;
+  min-height: 114px;
+  padding: 18px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.home-rebuild .home-first-step > div {
+  max-width: 238px;
+}
+
+.home-rebuild .home-first-step strong {
+  font-size: 16px;
+}
+
+.home-rebuild .home-first-step p {
+  margin: 6px 0 0;
+  color: #aaa6af;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.home-rebuild .home-first-step > button {
+  display: grid;
+  min-width: 60px;
+  min-height: 72px;
+  place-items: center;
+  border: 1px solid rgba(197, 166, 234, 0.13);
+  border-radius: 18px;
+  color: #ddd0ef;
+  background: #0b0b0e;
+  box-shadow: inset 0 0 24px rgba(162, 116, 218, 0.08);
+}
+
+.home-rebuild .home-first-step > button span {
+  color: transparent;
+  background: var(--home-score-glow);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 27px;
+  line-height: 1;
+  filter: var(--home-icon-glow);
+}
+
+.home-rebuild .home-first-step > button strong {
+  margin-top: -12px;
+}
+
+@keyframes home-rebuild-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-0.5deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(0.5deg);
+  }
+}
+
+@keyframes home-rebuild-glow {
+  0%,
+  100% {
+    opacity: 0.52;
+    transform: translateX(-50%) scale(0.97);
+  }
+  50% {
+    opacity: 0.72;
+    transform: translateX(-50%) scale(1.03);
+  }
+}
+
+@keyframes home-rebuild-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes home-rebuild-pill {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 360px) {
+  .home-rebuild .home-cave {
+    min-height: 520px;
+    padding-inline: 14px;
+  }
+
+  .home-rebuild .home-live__brand {
+    font-size: 21px;
+  }
+
+  .home-rebuild .home-stone {
+    height: 242px;
+    padding-bottom: 54px;
+  }
+
+  .home-rebuild .home-stone img {
+    width: 340px;
+  }
+
+  .home-rebuild .home-score-pills {
+    gap: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-rebuild .home-stone img,
+  .home-rebuild .home-stone__glow,
+  .home-rebuild[data-score-phase] .home-stone,
+  .home-rebuild[data-score-phase] .home-score,
+  .home-rebuild[data-score-phase] .home-score-pills button {
+    animation: none;
+  }
+}
+
+/* ── Floating particles around the stone ── */
+.home-stone { position: relative; }
+.home-stone::before,
+.home-stone::after {
+  content: "✦";
+  position: absolute;
+  font-size: 6px;
+  color: rgba(207, 172, 255, 0.6);
+  pointer-events: none;
+  animation: home-particle-float 4s ease-in-out infinite;
+}
+.home-stone::before { top: 15%; left: 8%; animation-delay: 0s; }
+.home-stone::after { top: 25%; right: 12%; animation-delay: -2s; font-size: 4px; color: rgba(184, 207, 250, 0.5); }
+
+@keyframes home-particle-float {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.4; }
+  25% { transform: translateY(-12px) scale(1.3); opacity: 0.9; }
+  50% { transform: translateY(-6px) translateX(5px) scale(0.8); opacity: 0.6; }
+  75% { transform: translateY(-18px) scale(1.1); opacity: 0.3; }
+}
+
+/* Extra particles via box-shadows on the glow span */
+.home-stone__glow {
+  animation: home-glow-breathe 3s ease-in-out infinite !important;
+}
+@keyframes home-glow-breathe {
+  0%, 100% { opacity: 0.7; filter: blur(20px); transform: scale(1); }
+  50% { opacity: 1; filter: blur(28px); transform: scale(1.08); }
+}
+
+/* Score number entrance — count up feel via clip-path reveal */
+.home-rebuild[data-score-phase="calculating"] .home-score strong {
+  animation: home-score-reveal 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes home-score-reveal {
+  from { transform: translateY(20px) scale(0.85); opacity: 0; filter: blur(4px); }
+  to { transform: translateY(0) scale(1); opacity: 1; filter: blur(0); }
+}
+
+/* Score pills staggered entrance with spring-like overshoot */
+.home-rebuild[data-score-phase="resolved"] .home-score-pills button {
+  animation: home-pill-spring 500ms cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+}
+.home-rebuild[data-score-phase="resolved"] .home-score-pills button:nth-child(1) { animation-delay: 0ms !important; }
+.home-rebuild[data-score-phase="resolved"] .home-score-pills button:nth-child(2) { animation-delay: 100ms !important; }
+.home-rebuild[data-score-phase="resolved"] .home-score-pills button:nth-child(3) { animation-delay: 200ms !important; }
+
+@keyframes home-pill-spring {
+  from { transform: translateY(16px) scale(0.7); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Subtle ambient shimmer on the cave background */
+.home-rebuild .home-cave::before {
+  animation: home-cave-shimmer 8s ease-in-out infinite !important;
+}
+@keyframes home-cave-shimmer {
+  0%, 100% { opacity: 0.84; }
+  50% { opacity: 0.92; filter: saturate(0.82) contrast(1.06) brightness(1.04); }
+}
+
+/* Usage app rows slide in staggered */
+.home-usage__row {
+  animation: home-row-slide 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.home-usage__row:nth-child(1) { animation-delay: 50ms; }
+.home-usage__row:nth-child(2) { animation-delay: 100ms; }
+.home-usage__row:nth-child(3) { animation-delay: 150ms; }
+.home-usage__row:nth-child(4) { animation-delay: 200ms; }
+.home-usage__row:nth-child(5) { animation-delay: 250ms; }
+
+@keyframes home-row-slide {
+  from { transform: translateX(-16px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Panels slide up on scroll-into-view feel */
+.home-panel {
+  animation: home-panel-rise 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.home-panel:nth-of-type(1) { animation-delay: 300ms; }
+.home-panel:nth-of-type(2) { animation-delay: 450ms; }
+.home-panel:nth-of-type(3) { animation-delay: 600ms; }
+
+@keyframes home-panel-rise {
+  from { transform: translateY(24px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Streak flame icon gentle pulse */
+.home-live__flame {
+  display: inline-block;
+  animation: flame-pulse 2s ease-in-out infinite;
+}
+@keyframes flame-pulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(207, 172, 255, 0.4)); }
+  50% { transform: scale(1.15); filter: drop-shadow(0 0 6px rgba(207, 172, 255, 0.8)); }
+}
+
+/* ── FIX 17/18: Mini score arc on home ── */
+.home-rebuild .home-score__mini-arc {
+  width: 120px;
+  height: 68px;
+  margin-bottom: -8px;
+}
+
+/* ── FIX 4: Reward card redesign — premium earned feel ── */
+@keyframes home-reward-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.home-rebuild .home-first-step {
+  background:
+    linear-gradient(145deg, rgba(30, 20, 48, 0.95), rgba(10, 8, 16, 0.95)) !important;
+  border: 1px solid transparent !important;
+  background-clip: padding-box !important;
+  position: relative !important;
+}
+
+.home-rebuild .home-first-step::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  padding: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(168, 85, 247, 0.1) 0%,
+    rgba(168, 85, 247, 0.5) 25%,
+    rgba(139, 92, 246, 0.8) 50%,
+    rgba(168, 85, 247, 0.5) 75%,
+    rgba(168, 85, 247, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: home-reward-shimmer 4s linear infinite;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.home-rebuild .home-first-step > div strong {
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
+.home-rebuild .home-first-step > div p {
+  color: #a78bca !important;
+}
+
+.home-rebuild .home-first-step > button span {
+  filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.6)) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════
+   HOME HERO — Score arc matching ScoreScreen layout
+   ══════════════════════════════════════════════════════ */
+
+.home-rebuild .home-hero {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  width: 100%;
+  margin-top: -40px;
+  justify-items: center;
+  padding-bottom: 4px;
+}
+
+/* Arc button — matches .score-live__arc exactly */
+.home-rebuild .home-arc {
+  position: relative;
+  display: grid;
+  width: 260px;
+  height: 148px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  color: #f5f0ff;
+  background: transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.home-rebuild .home-arc svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.home-rebuild .home-arc path {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.home-rebuild .home-arc__track {
+  stroke: #222225;
+}
+
+.home-rebuild .home-arc__value {
+  stroke: #bfa4ff;
+  filter: drop-shadow(0 0 8px rgba(145, 99, 223, 0.28));
+  stroke-dasharray: 100;
+  stroke-dashoffset: calc(100 - var(--score-progress, 0));
+  animation: home-arc-draw 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes home-arc-draw {
+  from { stroke-dashoffset: 100; }
+  to   { stroke-dashoffset: calc(100 - var(--score-progress, 0)); }
+}
+
+/* Score number centred inside the arc */
+.home-rebuild .home-arc strong {
+  position: absolute;
+  top: 55px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 47px;
+  font-weight: 750;
+  letter-spacing: -2px;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(115deg, #f7eaff 5%, #c99cff 43%, #86bcff 86%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 10px rgba(165, 95, 255, 0.18));
+}
+
+.home-rebuild .home-arc__heart {
+  color: #cfacff;
+  -webkit-text-fill-color: #cfacff;
+  font-size: 22px;
+  filter: drop-shadow(0 0 8px rgba(207, 172, 255, 0.38));
+}
+
+.home-rebuild .home-arc small {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(200, 180, 255, 0.5);
+}
+
+/* Branch connector between arc and pills */
+.home-rebuild .home-arc__branches {
+  position: relative;
+  width: 1px;
+  height: 32px;
+  margin-top: 2px;
+  background: rgba(222, 216, 231, 0.17);
+}
+
+.home-rebuild .home-arc__branches::before {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  width: min(64vw, 238px);
+  height: 20px;
+  border: 1px solid rgba(222, 216, 231, 0.17);
+  border-bottom: 0;
+  border-radius: 22px 22px 0 0;
+  content: "";
+  transform: translateX(-50%);
+}
+
+/* ── Arc inside cave: z-index only, centering handled by .home-hero parent ── */
+.home-rebuild .home-arc--cave {
+  z-index: 4;
+}
