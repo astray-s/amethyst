@@ -1,0 +1,389 @@
+.amethyst-settings {
+  width: min(100%, 480px);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: max(20px, env(safe-area-inset-top)) 18px calc(48px + env(safe-area-inset-bottom));
+  color: #f8f7fb;
+  background:
+    radial-gradient(80% 26% at 50% -8%, rgba(82, 45, 145, .15), transparent 72%),
+    #000;
+}
+
+.amethyst-settings-header {
+  display: flex;
+  min-height: 56px;
+  align-items: center;
+  gap: 14px;
+}
+
+.amethyst-settings-header button {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  color: #c9c7cd;
+  background: #1b1b1d;
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.amethyst-settings-header h1 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+.amethyst-settings-group {
+  margin-top: 30px;
+}
+
+.amethyst-settings-group h2 {
+  margin: 0 0 11px 1px;
+  color: #f4f3f7;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -.65px;
+}
+
+.amethyst-settings-card {
+  overflow: hidden;
+  border-radius: 30px;
+  background: #171718;
+}
+
+.amethyst-settings-row {
+  position: relative;
+  display: grid;
+  width: 100%;
+  min-height: 54px;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 17px;
+  border: 0;
+  color: #f4f3f7;
+  background: transparent;
+  text-align: left;
+}
+
+.amethyst-settings-row:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 17px;
+  bottom: 0;
+  left: 62px;
+  height: 1px;
+  background: #303033;
+}
+
+.amethyst-settings-icon {
+  display: grid;
+  width: 31px;
+  height: 31px;
+  place-items: center;
+  color: #a8a7ac;
+}
+
+.amethyst-settings-icon svg {
+  width: 23px;
+  height: 23px;
+}
+
+.amethyst-settings-row > div {
+  min-width: 0;
+}
+
+.amethyst-settings-row strong,
+.amethyst-settings-row small {
+  display: block;
+}
+
+.amethyst-settings-row strong {
+  font-size: 16px;
+  font-weight: 450;
+  letter-spacing: -.45px;
+}
+
+.amethyst-settings-row small {
+  margin-top: 3px;
+  overflow: hidden;
+  color: #969499;
+  font-size: 12px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+}
+
+.amethyst-settings-row > b {
+  color: #969499;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.amethyst-settings-row > em {
+  color: #969499;
+  font-size: 13px;
+  font-style: normal;
+}
+
+.amethyst-settings-link:active {
+  background: #202024;
+}
+
+.amethyst-settings-link.is-destructive strong,
+.amethyst-settings-link.is-destructive > b {
+  color: #ffaaa2;
+}
+
+.amethyst-settings-toggle {
+  cursor: pointer;
+}
+
+.amethyst-settings-toggle input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.amethyst-settings-toggle i {
+  position: relative;
+  width: 40px;
+  height: 23px;
+  border-radius: 999px;
+  background: #464548;
+  transition: background 180ms ease;
+}
+
+.amethyst-settings-toggle i::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #d7d5db;
+  transition: transform 180ms ease;
+}
+
+.amethyst-settings-toggle input:checked + i {
+  background: linear-gradient(135deg, #8c5bdc, #355f9d);
+}
+
+.amethyst-settings-toggle input:checked + i::before {
+  transform: translateX(17px);
+  background: #f8f6ff;
+}
+
+.amethyst-settings-toggle input:focus-visible + i {
+  outline: 2px solid var(--amethyst-cyan-soft);
+  outline-offset: 3px;
+}
+
+.amethyst-settings-permission {
+  min-height: 64px;
+}
+
+.amethyst-settings-permission .amethyst-settings-icon {
+  color: var(--amethyst-cyan-soft);
+}
+
+.amethyst-settings-permission button {
+  min-width: 62px;
+  padding: 7px 10px;
+  border: 1px solid #4a4850;
+  border-radius: 999px;
+  color: #f2f0f6;
+  background: #111113;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.amethyst-settings-permission button.is-ready {
+  border-color: rgba(184, 244, 255, .38);
+  color: #160e22;
+  background: linear-gradient(135deg, var(--amethyst-soft), var(--amethyst-cyan-soft));
+}
+
+.amethyst-settings-permission button:disabled {
+  opacity: .65;
+}
+
+.amethyst-settings-error,
+.amethyst-settings-footnote {
+  margin: 16px 12px 0;
+  color: #99969f;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.amethyst-settings-error {
+  color: #ffaaa2;
+}
+
+@media (max-width: 370px) {
+  .amethyst-settings { padding-inline: 16px; }
+  .amethyst-settings-row { padding-inline: 15px; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 10px; }
+  .amethyst-settings-row strong { font-size: 15px; }
+  .amethyst-settings-row small { font-size: 11px; }
+  .amethyst-settings-row:not(:last-child)::after { left: 57px; right: 15px; }
+}
+
+/* ─── Amethyst UI Polish: settings screen custom toggles and status indicators ─── */
+
+/* Enhanced card styling — deeper rounded corners and inner shadow */
+.amethyst-settings-card {
+  border-radius: 22px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .04);
+  border: 1px solid rgba(197, 200, 236, .06);
+}
+
+/* Custom toggle — refined pill shape */
+.amethyst-settings-toggle i {
+  display: block;
+  width: 48px;
+  height: 26px;
+  border-radius: 999px;
+  background: #3a3940;
+  transition: background 220ms ease;
+  flex-shrink: 0;
+}
+
+.amethyst-settings-toggle i::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #d7d5db;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+  transition: transform 220ms cubic-bezier(.4, .0, .2, 1), background 220ms ease;
+}
+
+.amethyst-settings-toggle input:checked + i {
+  background: linear-gradient(135deg, #8c5bdc, #5d3e97);
+  box-shadow: 0 0 12px rgba(140, 91, 220, .2);
+}
+
+.amethyst-settings-toggle input:checked + i::before {
+  transform: translateX(22px);
+  background: #f8f6ff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .25);
+}
+
+/* Permission status dot indicators */
+.amethyst-settings-permission button.is-ready::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 5px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 6px rgba(74, 222, 128, .5);
+  vertical-align: middle;
+}
+
+.amethyst-settings-permission button.is-requesting::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 5px;
+  border-radius: 50%;
+  background: #fbbf24;
+  box-shadow: 0 0 6px rgba(251, 191, 36, .4);
+  vertical-align: middle;
+  animation: amethyst-status-blink 1.4s ease-in-out infinite;
+}
+
+@keyframes amethyst-status-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .4; }
+}
+
+.amethyst-settings-permission button:disabled::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 5px;
+  border-radius: 50%;
+  background: #6b7280;
+  box-shadow: none;
+  vertical-align: middle;
+}
+
+/* Version badge at bottom */
+.amethyst-settings-version {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 32px 0 8px;
+  color: #5a5862;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .02em;
+}
+
+.amethyst-settings-version svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  opacity: .7;
+}
+
+/* Emergency bypass hold-to-activate progress ring */
+.amethyst-emergency-hold {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.amethyst-emergency-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.amethyst-emergency-ring circle {
+  fill: none;
+  stroke: #ff6b6b;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 126;
+  stroke-dashoffset: 126;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  transition: stroke-dashoffset 3s linear;
+}
+
+.amethyst-emergency-hold.is-holding .amethyst-emergency-ring circle {
+  stroke-dashoffset: 0;
+}
+
+/* Settings row interactive states */
+.amethyst-settings-link {
+  transition: background 0.15s ease;
+}
+
+.amethyst-settings-row {
+  transition: background 0.12s ease;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .amethyst-settings-permission button.is-requesting::before { animation: none; }
+  .amethyst-emergency-ring circle { transition: none; }
+}

@@ -1,0 +1,26 @@
+.amethyst-app-glyph {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  overflow: hidden;
+  padding: 8px;
+  border-radius: 27%;
+  color: #fff;
+  background: linear-gradient(145deg, #343038, #18161c);
+  fill: currentColor;
+  font-weight: 700;
+  line-height: 1;
+  object-fit: cover;
+}
+
+.amethyst-app-glyph--small { width: 34px; height: 34px; font-size: 17px; }
+.amethyst-app-glyph--large { width: 48px; height: 48px; padding: 11px; font-size: 23px; }
+.amethyst-app-glyph--instagram { background: radial-gradient(circle at 70% 90%, #ffdb6b 0 10%, #e93a78 42%, #7137ba 75%); }
+.amethyst-app-glyph--facebook { color: #fff; background: #1877f2; }
+.amethyst-app-glyph--tiktok { color: #fff; background: #101010; filter: drop-shadow(1px 1px 0 #f34e69) drop-shadow(-1px -1px 0 #26f2e1); }
+.amethyst-app-glyph--youtube { color: #fff; background: #ff0033; }
+.amethyst-app-glyph--netflix { color: #e50914; background: #080808; }
+.amethyst-app-glyph--reddit { color: #fff; background: #ff4500; }
+.amethyst-app-glyph--discord { color: #fff; background: #5865f2; }
+.amethyst-app-glyph--x { color: #fff; background: #080808; }
+.amethyst-app-glyph--chrome { color: #fff; background: conic-gradient(#e84336 0 33%, #f8d84b 0 66%, #2baf5d 0); }

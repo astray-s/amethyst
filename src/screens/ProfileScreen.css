@@ -1,0 +1,194 @@
+
+.amethyst-profile {
+  width: min(100%, 480px);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: max(16px, env(safe-area-inset-top)) 20px 126px;
+  color: #fff;
+  background: #000;
+}
+
+/* Header — back arrow + settings */
+.amethyst-profile__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  margin-bottom: 20px;
+}
+.amethyst-profile__back-btn,
+.amethyst-profile__settings-btn {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: none;
+  border-radius: 50%;
+  color: var(--amethyst-accent, #b39aff);
+  background: rgba(179, 154, 255, .08);
+}
+.amethyst-profile__back-btn svg,
+.amethyst-profile__settings-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Identity — badge + name */
+.amethyst-profile__identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 28px;
+}
+.amethyst-profile__badge {
+  margin-bottom: 12px;
+}
+.amethyst-profile__badge svg text {
+  font-family: inherit;
+}
+.amethyst-profile__identity h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #fff;
+}
+
+/* Stats row — two columns with centered divider */
+.amethyst-profile__stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 32px;
+  padding: 0 20px;
+}
+.amethyst-profile__stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.amethyst-profile__stat-divider {
+  width: 1px;
+  height: 72px;
+  background: rgba(255, 255, 255, .08);
+  flex-shrink: 0;
+}
+.amethyst-profile__stat-icon {
+  display: grid;
+  place-items: center;
+  margin-bottom: 8px;
+}
+.amethyst-profile__stat-icon svg {
+  display: block;
+}
+.amethyst-profile__stat strong {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  color: #fff;
+}
+.amethyst-profile__stat small {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: rgba(255, 255, 255, .4);
+  text-transform: uppercase;
+}
+
+/* AVG Screen Time section */
+.amethyst-profile__journey {
+  margin-bottom: 24px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, .06);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .02);
+}
+.amethyst-profile__journey-header {
+  margin-bottom: 4px;
+}
+.amethyst-profile__journey-header span {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: rgba(255, 255, 255, .35);
+  text-transform: uppercase;
+}
+.amethyst-profile__journey-desc {
+  margin: 0 0 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, .55);
+}
+.amethyst-profile__journey-desc b {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Chart */
+.amethyst-profile__chart {
+  position: relative;
+}
+.amethyst-profile__chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.amethyst-profile__grid-line {
+  stroke: rgba(255, 255, 255, .065);
+  stroke-width: .7;
+}
+.amethyst-profile__tick-label,
+.amethyst-profile__date-label {
+  fill: rgba(255, 255, 255, .34);
+  font-family: inherit;
+  font-size: 8px;
+  font-weight: 500;
+}
+.amethyst-profile__date-label {
+  fill: rgba(255, 255, 255, .3);
+  font-size: 8.5px;
+}
+.amethyst-profile__average-line {
+  stroke: rgba(213, 198, 255, .5);
+  stroke-width: .8;
+  stroke-dasharray: 3 3;
+}
+.amethyst-profile__bar {
+  fill: url(#profile-chart-bar);
+  opacity: .82;
+}
+.amethyst-profile__bar.is-today {
+  opacity: 1;
+  filter: drop-shadow(0 0 4px rgba(179, 154, 255, .5));
+}
+.amethyst-profile__missing-day {
+  fill: transparent;
+  stroke: rgba(255, 255, 255, .28);
+  stroke-width: 1;
+}
+.amethyst-profile__chart-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 5px 0 0;
+  color: rgba(255, 255, 255, .36);
+  font-size: 9px;
+  line-height: 1.35;
+}
+.amethyst-profile__chart-note span {
+  width: 5px;
+  height: 5px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(255, 255, 255, .32);
+  border-radius: 50%;
+}
+
+
+@media (min-width: 520px) {
+  .amethyst-profile { border-inline: 1px solid rgba(255, 255, 255, .04); }
+}

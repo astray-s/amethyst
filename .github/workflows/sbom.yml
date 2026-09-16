@@ -1,0 +1,63 @@
+name: Generate SBOM
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sbom:
+    name: Build dependency inventory
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Set up JDK
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle
+
+      - name: Install frozen JavaScript dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Generate CycloneDX npm SBOM
+        run: npm sbom --package-lock-only --sbom-format=cyclonedx > sbom.cdx.json
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Sync Capacitor Android project
+        run: npx cap sync android
+
+      - name: Generate Android dependency report
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon :app:dependencies > ../android-dependencies.txt
+
+      - name: Upload dependency inventory
+        uses: actions/upload-artifact@v7
+        with:
+          name: amethyst-sbom-${{ github.sha }}
+          path: |
+            sbom.cdx.json
+            android-dependencies.txt
+          if-no-files-found: error
+          retention-days: 90

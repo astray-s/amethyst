@@ -1,0 +1,33 @@
+/*
+ * Amethyst homepage brand tokens.
+ *
+ * Reference only: these values document the approved homepage brand system.
+ * They are intentionally copied from src/screens/HomeScreen.brand.css.
+ */
+
+:root {
+  --amethyst-brand-bg: #050506;
+  --amethyst-brand-surface: #0d0d10;
+  --amethyst-brand-surface-deep: #08080a;
+  --amethyst-brand-border: rgba(229, 221, 240, 0.09);
+  --amethyst-brand-text: #f7f5f9;
+  --amethyst-brand-muted: #aaa6b0;
+  --amethyst-brand-dim: #77737d;
+  --amethyst-brand-lilac: #c6a5f7;
+  --amethyst-brand-violet: #a976e8;
+  --amethyst-brand-ice-lilac: #b8cffa;
+
+  /* Locked white → lilac → pink-lavender score treatment. */
+  --amethyst-brand-score-glow:
+    linear-gradient(105deg, #f5eaff 0%, #cfacff 52%, #c09cec 100%);
+
+  --amethyst-brand-icon-glow:
+    drop-shadow(0 0 3px rgba(255, 248, 255, 0.82))
+    drop-shadow(0 0 9px rgba(207, 172, 255, 0.68))
+    drop-shadow(0 0 15px rgba(192, 156, 236, 0.34));
+
+  --amethyst-brand-card:
+    radial-gradient(circle at 12% 0, rgba(164, 119, 218, 0.07), transparent 42%),
+    linear-gradient(145deg, #0d0d10, #08080a);
+}
+
